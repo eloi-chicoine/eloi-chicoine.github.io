@@ -5,7 +5,7 @@ export const profil = {
   telephone: '06 88 40 05 56',
   telephoneLien: '+33688400556',
   linkedin: 'https://www.linkedin.com/in/eloi-chicoine-199198389/',
-  cv: 'cv/eloi-chicoine-cv.pdf', // dans public/
+  cv: 'cv/CV-Chicoine_Eloi.pdf', // dans public/
 };
 
 // Les clés (design, video…) renvoient aux titres dans panels.tools des fichiers de traduction.

@@ -25,7 +25,7 @@ machine (Node 26 + Astro 5) : en cas de doute, arrêter et relancer `npm run voi
 | Changer un texte du site         | `src/i18n/fr.json` et `src/i18n/en.json`    |
 | Changer outils, e-mail, LinkedIn | `src/data/profil.ts`                        |
 | Changer ma photo (N&B, détourée) | `src/assets/photos/portrait.webp` (fond transparent conseillé) |
-| Remplacer le CV                  | `public/cv/eloi-chicoine-cv.pdf`            |
+| Remplacer le CV                  | `public/cv/CV-Chicoine_Eloi.pdf` (si le nom change : `src/data/profil.ts`) |
 | Couleurs, typos, grille          | `src/styles/tokens.css`                     |
 | Changer les scènes des univers   | réexporter `src/assets/svg/scenes.svg` depuis Affinity, puis `npm run scenes` |
 
