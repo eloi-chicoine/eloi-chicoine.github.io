@@ -1,0 +1,88 @@
+---
+import '@fontsource/aboreto/400.css';
+import '@fontsource/akatab/400.css';
+import '@fontsource/akatab/600.css';
+import '../styles/tokens.css';
+import '../styles/base.css';
+import '../styles/grid.css';
+
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import GridLines from '../components/GridLines.astro';
+import { t, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  /** Adresse de la même page dans l'autre langue */
+  alternate: string;
+  title?: string;
+  description?: string;
+  /** false sur l'accueil : en-tête, pied de page et grille sont posés dans les panneaux horizontaux */
+  chrome?: boolean;
+}
+
+const { lang, alternate, title, description, chrome = true } = Astro.props;
+const pageTitle = title ? `${title} — Eloi Chicoine` : t(lang, 'meta.title');
+const pageDescription = description ?? t(lang, 'meta.description');
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const alternateUrl = new URL(alternate, Astro.site);
+const autre = lang === 'fr' ? 'en' : 'fr';
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang={lang} href={canonical} />
+    <link rel="alternate" hreflang={autre} href={alternateUrl} />
+    <link rel="icon" href={`${import.meta.env.BASE_URL}favicon.svg`} type="image/svg+xml" />
+    <meta name="theme-color" content="#f5f3ee" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_GB'} />
+    {!chrome && <meta name="hscroll" content="1" />}
+    <script is:inline>
+      document.documentElement.classList.add('js');
+      // Accueil : pas de restauration de la position de scroll au rechargement
+      if (document.querySelector('meta[name="hscroll"]') && 'scrollRestoration' in history)
+        history.scrollRestoration = 'manual';
+      // Défilement horizontal sur desktop : même requête que HSCROLL_QUERY (src/scripts/hscroll.ts)
+      if (
+        document.querySelector('meta[name="hscroll"]') &&
+        matchMedia('(min-width: 1024px) and (prefers-reduced-motion: no-preference)').matches
+      )
+        document.documentElement.classList.add('is-h');
+      // Intro de l'accueil (src/scripts/intro.ts) : une fois par visite, jamais avec une ancre
+      // ni avec prefers-reduced-motion. Filet de sécurité : tout s'affiche au bout de 4 s.
+      if (
+        document.querySelector('meta[name="hscroll"]') &&
+        !location.hash &&
+        !matchMedia('(prefers-reduced-motion: reduce)').matches
+      ) {
+        try {
+          if (!sessionStorage.getItem('intro-vue')) {
+            document.documentElement.classList.add('is-intro');
+            setTimeout(() => document.documentElement.classList.remove('is-intro'), 4000);
+          }
+        } catch (e) {}
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#contenu">{lang === 'fr' ? 'Aller au contenu' : 'Skip to content'}</a>
+    <div class="page">
+      {chrome && <GridLines />}
+      {chrome && <Header lang={lang} alternate={alternate} />}
+      <main id="contenu">
+        <slot />
+      </main>
+      {chrome && <Footer lang={lang} />}
+    </div>
+  </body>
+</html>

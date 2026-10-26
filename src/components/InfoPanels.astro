@@ -1,0 +1,325 @@
+---
+// Les trois pictos de l'accueil (Moi / Outils / Parcours) et leurs pop-ups.
+// Sans JavaScript, les trois blocs restent affichés l'un sous l'autre.
+import { outils, profil } from '../data/profil';
+import { t, dict, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const parcours = dict(lang).panels.path.items;
+const groupes = Object.entries(outils) as [keyof typeof outils, readonly string[]][];
+
+const pictos = [
+  { id: 'moi', label: t(lang, 'panels.me.button') },
+  { id: 'outils', label: t(lang, 'panels.tools.button') },
+  { id: 'parcours', label: t(lang, 'panels.path.button') },
+];
+---
+
+<ul class="pictos col-c" aria-label={t(lang, 'panels.label')} data-intro>
+  {
+    pictos.map(({ id, label }) => (
+      <li>
+        <a class="picto" href={`#${id}`} data-panel-trigger={id} aria-controls={id} title={label}>
+          <span class="visually-hidden">{label}</span>
+          {id === 'moi' && (
+            <svg viewBox="0 0 32 32" aria-hidden="true">
+              <circle cx="16" cy="10" r="5.5" />
+              <path d="M6 28v-3c0-5 4.5-8 10-8s10 3 10 8v3z" />
+            </svg>
+          )}
+          {id === 'outils' && (
+            <svg viewBox="0 0 32 32" aria-hidden="true">
+              <g transform="rotate(45 16 16)">
+                <path d="M12.2 13.2A6.6 6.6 0 0 1 11.1 2.6l2.6 2.8v3.3h4.6V5.4l2.6-2.8a6.6 6.6 0 0 1-1.1 10.6z" />
+                <rect x="13.3" y="12.5" width="5.4" height="18" />
+              </g>
+            </svg>
+          )}
+          {id === 'parcours' && (
+            <svg viewBox="0 0 32 32" aria-hidden="true">
+              <path d="M11 4h2v24h-2zM13 10h10v2H13zM13 20h10v2H13z" />
+              <rect x="8" y="2" width="8" height="5" />
+              <rect x="22" y="8" width="6" height="6" />
+              <rect x="22" y="18" width="6" height="6" />
+              <rect x="8" y="25" width="8" height="5" />
+            </svg>
+          )}
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<div class="panels col-d" data-panels>
+  <span class="panels__connector" data-connector aria-hidden="true"></span>
+
+  <section class="panel" id="moi" data-panel aria-labelledby="moi-title">
+    <span class="panel__line panel__line--t" aria-hidden="true"></span>
+    <span class="panel__line panel__line--r" aria-hidden="true"></span>
+    <span class="panel__line panel__line--b" aria-hidden="true"></span>
+    <span class="panel__line panel__line--l" aria-hidden="true"></span>
+    <div class="panel__scroll">
+      <div class="panel__body">
+      <h2 id="moi-title" class="panel__title display" tabindex="-1">{t(lang, 'panels.me.title')}</h2>
+      <p>{t(lang, 'panels.me.p1')}</p>
+      <p>{t(lang, 'panels.me.p2')}</p>
+      <p>{t(lang, 'panels.me.p3')}</p>
+      <p class="caps">{t(lang, 'panels.me.languages')}</p>
+      <p><a class="trait" href={profil.linkedin} rel="me noopener" target="_blank">{t(lang, 'panels.me.linkedin')}</a></p>
+    </div>
+    <button class="panel__close caps" type="button" data-panel-close>{t(lang, 'panels.close')}</button>
+    </div>
+  </section>
+
+  <section class="panel" id="outils" data-panel aria-labelledby="outils-title">
+    <span class="panel__line panel__line--t" aria-hidden="true"></span>
+    <span class="panel__line panel__line--r" aria-hidden="true"></span>
+    <span class="panel__line panel__line--b" aria-hidden="true"></span>
+    <span class="panel__line panel__line--l" aria-hidden="true"></span>
+    <div class="panel__scroll">
+      <div class="panel__body">
+      <h2 id="outils-title" class="panel__title display" tabindex="-1">{t(lang, 'panels.tools.title')}</h2>
+      <dl class="tools">
+        {
+          groupes.map(([cle, liste]) => (
+            <div class="tools__row">
+              <dt class="caps">{t(lang, `panels.tools.${cle}`)}</dt>
+              <dd>{liste.join(' · ')}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+    <button class="panel__close caps" type="button" data-panel-close>{t(lang, 'panels.close')}</button>
+    </div>
+  </section>
+
+  <section class="panel" id="parcours" data-panel aria-labelledby="parcours-title">
+    <span class="panel__line panel__line--t" aria-hidden="true"></span>
+    <span class="panel__line panel__line--r" aria-hidden="true"></span>
+    <span class="panel__line panel__line--b" aria-hidden="true"></span>
+    <span class="panel__line panel__line--l" aria-hidden="true"></span>
+    <div class="panel__scroll">
+      <div class="panel__body">
+      <h2 id="parcours-title" class="panel__title display" tabindex="-1">{t(lang, 'panels.path.title')}</h2>
+      <ol class="path">
+        {
+          parcours.map((item) => (
+            <li>
+              <span class="path__date caps">{item.date}</span>
+              <span>{item.text}</span>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+    <button class="panel__close caps" type="button" data-panel-close>{t(lang, 'panels.close')}</button>
+    </div>
+  </section>
+</div>
+
+<script>
+  import { initPanels } from '../scripts/panels';
+  initPanels();
+</script>
+
+<style>
+  .pictos {
+    grid-row: 1;
+    padding-top: 83px;
+    display: flex;
+    flex-direction: column;
+    gap: 115px;
+  }
+
+  .picto {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 58px;
+    border: var(--stroke) solid var(--ink);
+    background: var(--placeholder);
+    color: var(--ink);
+    transition:
+      background-color var(--dur-fast),
+      color var(--dur-fast);
+  }
+
+  .picto svg {
+    width: 34px;
+    height: 34px;
+    fill: currentColor;
+  }
+
+  .picto[aria-expanded='true'] {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  /* Zone des pop-ups : la colonne de droite, vide dans la maquette */
+  .panels {
+    grid-row: 1;
+    position: relative;
+    padding-top: 83px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .panel {
+    position: relative;
+    background: var(--paper);
+    padding: var(--space-5);
+    border: var(--stroke) solid var(--ink);
+  }
+
+  .panel__line,
+  .panels__connector {
+    display: none;
+  }
+
+  /* Avec JavaScript : un seul pop-up à la fois, posé dans la colonne */
+  :global(.js) .panels {
+    display: block;
+  }
+
+  :global(.js) .panel {
+    position: absolute;
+    top: 83px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    border: 0;
+    padding: 0;
+  }
+
+  /* Le texte défile à l'intérieur ; le cadre (panel__line) reste fixe autour */
+  .panel__scroll {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  :global(.js) .panel__scroll {
+    height: 100%;
+    overflow: auto;
+    padding: var(--space-5);
+  }
+
+  :global(.js) .panel:not(.is-open) {
+    display: none;
+  }
+
+  :global(.js) .panel__line {
+    display: block;
+    position: absolute;
+    background: var(--ink);
+  }
+
+  .panel__line--t,
+  .panel__line--b {
+    left: 0;
+    right: 0;
+    height: var(--stroke);
+  }
+  .panel__line--l,
+  .panel__line--r {
+    top: 0;
+    bottom: 0;
+    width: var(--stroke);
+  }
+  .panel__line--t { top: 0; }
+  .panel__line--b { bottom: 0; }
+  .panel__line--l { left: 0; }
+  .panel__line--r { right: 0; }
+
+  /* Trait qui relie le picto actif au pop-up, à travers la gouttière */
+  :global(.js) .panels__connector {
+    display: block;
+    position: absolute;
+    left: calc(-1 * var(--gut));
+    width: var(--gut);
+    height: var(--stroke);
+    background: var(--ink);
+    top: var(--connector-y, 0);
+    transform-origin: left center;
+    visibility: hidden;
+  }
+
+  .panel__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    font-size: var(--fs-s);
+  }
+
+  .panel__title {
+    font-size: var(--fs-xl);
+    outline: none;
+  }
+
+  .panel__close {
+    align-self: flex-start;
+    margin-top: auto;
+    border: 0;
+    background: none;
+    padding: 0;
+    font-size: var(--fs-xs);
+    display: none;
+  }
+
+  :global(.js) .panel__close {
+    display: block;
+  }
+
+  .tools__row {
+    padding-block: var(--space-3);
+    border-top: var(--stroke) solid var(--line);
+  }
+
+  .tools__row dt {
+    font-size: var(--fs-xs);
+    color: var(--ink-soft);
+  }
+
+  .path li {
+    display: grid;
+    gap: var(--space-1);
+    padding-block: var(--space-3);
+    border-top: var(--stroke) solid var(--line);
+  }
+
+  .path__date {
+    font-size: var(--fs-xs);
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 1023px) {
+    .pictos {
+      grid-row: auto;
+      flex-direction: row;
+      padding-top: 0;
+      gap: var(--space-4);
+    }
+    .picto {
+      width: 62px;
+    }
+    .panels {
+      grid-row: auto;
+      padding-top: 0;
+    }
+    :global(.js) .panel {
+      position: relative;
+      top: 0;
+    }
+    /* Sur mobile le pop-up est sous les pictos : pas de trait de liaison latéral */
+    :global(.js) .panels__connector {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,89 @@
+---
+// Accueil → 3 univers → contact. Sur desktop, la suite défile à l'horizontale
+// (src/scripts/hscroll.ts) ; ailleurs, elle reste verticale.
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import GridLines from '../components/GridLines.astro';
+import Hero from '../components/Hero.astro';
+import Chapters from '../components/Chapters.astro';
+import ChapterNav from '../components/ChapterNav.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import { url, autreLangue, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const alternate = url(autreLangue(lang), '/');
+---
+
+<Base lang={lang} alternate={alternate} chrome={false}>
+  <div class="hscroll" data-hscroll>
+    <div class="hscroll__track" data-track>
+      <div class="panel panel--home" id="accueil" data-chapter="accueil">
+        <GridLines />
+        <Header lang={lang} alternate={alternate} />
+        <Hero lang={lang} />
+      </div>
+
+      <Chapters lang={lang} />
+
+      <div class="panel panel--contact" data-chapter="contact">
+        <GridLines />
+        <Contact lang={lang} />
+        <Footer lang={lang} />
+      </div>
+    </div>
+  </div>
+
+  <ChapterNav lang={lang} />
+</Base>
+
+<script>
+  import { initIntro } from '../scripts/intro';
+  import { initHScroll } from '../scripts/hscroll';
+  initIntro();
+  initHScroll();
+</script>
+
+<style>
+  .panel {
+    position: relative;
+    background: var(--paper);
+  }
+
+  /* clip et non hidden : un conteneur hidden peut être défilé par le navigateur (ancres, focus)
+     et se décaler par rapport à la piste animée par GSAP */
+  :global(.is-h) .hscroll {
+    height: 100vh;
+    overflow: clip;
+  }
+
+  :global(.is-h) .hscroll__track {
+    display: flex;
+    width: max-content;
+    height: 100vh;
+    will-change: transform;
+  }
+
+  :global(.is-h) .panel {
+    flex: none;
+    width: 100vw;
+    height: 100vh;
+    overflow: clip;
+  }
+
+  :global(.is-h) .panel--home {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Place pour la barre des chapitres sous le pied de page */
+  :global(.is-h) .panel--contact {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 64px;
+  }
+</style>

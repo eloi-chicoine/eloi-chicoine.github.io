@@ -1,0 +1,70 @@
+---
+import { t, urlAccueil, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  alternate: string;
+}
+
+const { lang, alternate } = Astro.props;
+const autre = lang === 'fr' ? 'en' : 'fr';
+---
+
+<header class="header grid">
+  <a class="header__name display col-ab" href={urlAccueil(lang)} data-intro>Eloi Chicoine</a>
+  <nav class="header__nav col-d" aria-label={t(lang, 'nav.label')} data-intro>
+    <ul>
+      <li><a class="trait" href={urlAccueil(lang, 'moi')} data-open-panel="moi">{t(lang, 'nav.about')}</a></li>
+      <li><a class="trait" href={urlAccueil(lang, 'projets')}>{t(lang, 'nav.projects')}</a></li>
+      <li><a class="trait" href={urlAccueil(lang, 'contact')}>{t(lang, 'nav.contact')}</a></li>
+      <li class="header__lang">
+        <a class="trait" href={alternate} hreflang={autre} lang={autre} title={t(lang, 'nav.lang')}>
+          {t(lang, 'nav.langShort')}
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
+<div class="band" aria-hidden="true"></div>
+
+<style>
+  .header {
+    height: var(--header-h);
+    align-items: center;
+  }
+
+  .header__name {
+    padding-left: 16px;
+    font-size: var(--fs-l);
+    width: fit-content;
+  }
+
+  .header__nav ul {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--space-5);
+    text-transform: uppercase;
+    font-size: var(--fs-s);
+    letter-spacing: 0.02em;
+  }
+
+  .header__lang {
+    padding-left: var(--space-5);
+    border-left: var(--stroke) solid var(--line);
+  }
+
+  @media (max-width: 1023px) {
+    .header {
+      height: auto;
+      padding-block: var(--space-4);
+      row-gap: var(--space-3);
+    }
+    .header__name {
+      padding-left: 0;
+    }
+    .header__nav ul {
+      justify-content: flex-start;
+      flex-wrap: wrap;
+    }
+  }
+</style>

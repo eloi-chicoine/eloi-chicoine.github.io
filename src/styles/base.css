@@ -1,0 +1,176 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: var(--fs-m);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+dl,
+dd,
+figure {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+img,
+svg,
+video,
+iframe {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+  border-radius: 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Titres : Aboreto, toujours en capitales */
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: var(--track-display);
+  line-height: 1.05;
+}
+
+/* Petites capitales d'étiquette, en Akatab */
+.caps {
+  font-size: var(--fs-s);
+  text-transform: uppercase;
+  letter-spacing: var(--track-caps);
+}
+
+/* Liens : un trait qui se dessine au survol (propre à la DA) */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.trait {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% var(--stroke);
+  transition: background-size 0.35s var(--ease-draw);
+  padding-bottom: 2px;
+}
+
+.trait:hover,
+.trait:focus-visible,
+.trait[aria-current='page'] {
+  background-size: 100% var(--stroke);
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* Bouton rectangulaire, trait fin, sans arrondi ni ombre */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-5);
+  border: var(--stroke) solid var(--ink);
+  background: transparent;
+  font-size: var(--fs-s);
+  text-transform: uppercase;
+  letter-spacing: var(--track-caps);
+  transition:
+    background-color var(--dur-fast),
+    color var(--dur-fast);
+}
+
+.btn:hover,
+.btn:focus-visible {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--space-4);
+  top: -100px;
+  z-index: 100;
+  background: var(--ink);
+  color: var(--paper);
+  padding: var(--space-2) var(--space-4);
+}
+
+.skip-link:focus {
+  top: var(--space-4);
+}
+
+/* Intro de l'accueil : état de départ avant l'animation (src/scripts/intro.ts) */
+.is-intro .panel--home .grid-lines > span {
+  transform: scaleY(0);
+}
+
+.is-intro .panel--home .band {
+  transform: scaleX(0);
+}
+
+.is-intro .panel--home .spiral {
+  visibility: hidden;
+}
+
+.is-intro [data-intro] {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0s !important;
+    animation-duration: 0s !important;
+  }
+}

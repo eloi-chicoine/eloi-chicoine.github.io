@@ -1,0 +1,77 @@
+---
+// Construction de la spirale de Fibonacci (rectangle d'or 21 × 13), calculée et non dessinée à la main.
+// Carrés 13, 8, 5, 3, 2, 1, 1 ; un quart de cercle exact dans chaque carré.
+// Retournée verticalement : le cœur de la spirale est en haut, près de la bande.
+// Le dessin prend toute la largeur de la colonne B sans être déformé ; le bas est coupé par l'écran.
+const U = 20;
+const H = 13; // hauteur du rectangle, pour le retournement
+const carres = [
+  { x: 0, y: 0, c: 13 },
+  { x: 13, y: 0, c: 8 },
+  { x: 16, y: 8, c: 5 },
+  { x: 13, y: 10, c: 3 },
+  { x: 13, y: 8, c: 2 },
+  { x: 15, y: 8, c: 1 },
+  { x: 15, y: 9, c: 1 },
+];
+// Quarts de cercle : point de départ, rayon, point d'arrivée
+const arcs = [
+  { de: [0, 13], r: 13, a: [13, 0] },
+  { de: [13, 0], r: 8, a: [21, 8] },
+  { de: [21, 8], r: 5, a: [16, 13] },
+  { de: [16, 13], r: 3, a: [13, 10] },
+  { de: [13, 10], r: 2, a: [15, 8] },
+  { de: [15, 8], r: 1, a: [16, 9] },
+  { de: [16, 9], r: 1, a: [15, 10] },
+];
+const px = (n: number) => n * U;
+const py = (n: number) => (H - n) * U; // retournement vertical
+// Le retournement inverse le sens de rotation : sweep-flag 0
+const spirale =
+  `M${px(arcs[0].de[0])},${py(arcs[0].de[1])} ` +
+  arcs.map(({ r, a }) => `A${px(r)},${px(r)} 0 0 0 ${px(a[0])},${py(a[1])}`).join(' ');
+---
+
+<div class="spiral" aria-hidden="true">
+  <svg viewBox={`0 0 ${px(21)} ${px(13)}`}>
+    {carres.map(({ x, y, c }) => <rect x={px(x)} y={py(y + c)} width={px(c)} height={px(c)} />)}
+    <path id="spirale" d={spirale}></path>
+  </svg>
+</div>
+
+<style>
+  /* Bande + rangée du bas de la colonne B ; ce qui dépasse en bas est masqué */
+  .spiral {
+    grid-column: b;
+    grid-row: 2 / 4;
+    position: relative;
+    z-index: 3;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .spiral svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  /* Même couleur que les lignes du plan : le motif fait partie du fond */
+  .spiral rect,
+  .spiral path {
+    fill: none;
+    stroke: var(--line);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+
+  /* Mobile : sous les pictos, sur toute la largeur, bas coupé comme sur desktop */
+  @media (max-width: 1023px) {
+    .spiral {
+      grid-column: a;
+      grid-row: auto;
+      height: 46vw;
+    }
+  }
+</style>

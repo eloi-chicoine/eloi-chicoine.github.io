@@ -1,0 +1,242 @@
+---
+// Repère de défilement : une échelle graduée en bas de l'écran, comme sur un plan.
+// Chaque graduation est une étape (accueil, univers, contact) ; le petit personnage roule
+// sur la ligne en même temps que le scroll (src/scripts/hscroll.ts → initRepere).
+import { Image } from 'astro:assets';
+import chibi from '../assets/photos/chibi.png';
+import { getProjets, parUnivers, numero, indexUnivers } from '../lib/projets';
+import { t, tr, urlProjet, formatDate, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const projets = await getProjets();
+const etapes = [
+  { id: 'accueil', label: t(lang, 'nav.home') },
+  ...parUnivers(projets)
+    .filter((c) => c.projets.length)
+    .map((c) => ({ id: c.univers, label: t(lang, `univers.${c.univers}`) })),
+  { id: 'contact', label: t(lang, 'nav.contact') },
+];
+---
+
+<nav class="repere" aria-label={t(lang, 'nav.chapters')} data-repere data-intro>
+  <div class="repere__rail" data-rail>
+    <ol class="repere__etapes">
+      {
+        etapes.map(({ id, label }, i) => (
+          <li class="repere__etape" data-etape={id} style={`--pos: ${i / (etapes.length - 1)}`}>
+            <a href={`#${id}`} data-nav={id}>
+              {label}
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+    <Image src={chibi} alt="" class="repere__chibi" data-chibi widths={[80, 160]} sizes="64px" loading="eager" />
+  </div>
+  <button type="button" class="repere__liste" data-list-open>{t(lang, 'projects.listOpen')}</button>
+</nav>
+
+<dialog class="list-dialog" aria-labelledby="list-title" data-list-dialog>
+  <div class="list-dialog__head">
+    <h2 id="list-title" class="display">{t(lang, 'projects.listTitle')}</h2>
+    <button type="button" class="caps list-dialog__close" data-list-close>{t(lang, 'panels.close')}</button>
+  </div>
+  <div class="list-dialog__cols caps" aria-hidden="true">
+    <span>{t(lang, 'projects.colTitle')}</span>
+    <span>{t(lang, 'projects.colUnivers')}</span>
+    <span>{t(lang, 'projects.colDate')}</span>
+  </div>
+  <ul>
+    {
+      projets.map((p) => (
+        <li>
+          <a href={urlProjet(lang, p.id)} class="list-dialog__row">
+            <span class="list-dialog__title">
+              <span class="list-dialog__num caps">
+                {indexUnivers(p.data.univers)}.{numero(projets, p)}
+              </span>
+              <span class="trait">{tr(lang, p.data.titre)}</span>
+            </span>
+            <span>{t(lang, `univers.${p.data.univers}`)}</span>
+            <span class="caps">{formatDate(lang, p.data.date)}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</dialog>
+
+<style>
+  /* Bande papier en bas de l'écran ; sa bordure haute est la ligne d'échelle */
+  .repere {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
+    height: 40px;
+    display: flex;
+    align-items: stretch;
+    background: var(--paper);
+    border-top: var(--stroke) solid var(--ink);
+    padding-left: calc(var(--col-m) + var(--gut));
+  }
+
+  .repere__rail {
+    position: relative;
+    flex: 1;
+    margin-right: 120px; /* place pour le dernier libellé */
+  }
+
+  .repere__etape {
+    position: absolute;
+    top: 0;
+    left: calc(var(--pos) * 100%);
+  }
+
+  /* Graduation */
+  .repere__etape::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: var(--stroke);
+    height: 7px;
+    background: var(--ink);
+  }
+
+  .repere__etape a {
+    display: block;
+    padding: 12px 0 0 8px;
+    font-size: var(--fs-xs);
+    text-transform: uppercase;
+    letter-spacing: var(--track-caps);
+    color: var(--ink-soft);
+    white-space: nowrap;
+    transition: color var(--dur-fast);
+  }
+
+  .repere__etape a:hover,
+  .repere__etape a:focus-visible,
+  .repere__etape a[aria-current='true'] {
+    color: var(--ink);
+  }
+
+  .repere__etape a[aria-current='true'] {
+    font-weight: 600;
+  }
+
+  /* Le personnage roule sur la ligne (la roue touche la bordure) */
+  .repere__rail :global(.repere__chibi) {
+    position: absolute;
+    left: 0;
+    bottom: 100%;
+    margin-bottom: 0;
+    width: auto;
+    height: 64px;
+    transform-origin: 50% 100%;
+    translate: -50% 0;
+    pointer-events: none;
+    will-change: transform;
+  }
+
+  .repere__liste {
+    border: 0;
+    border-left: var(--stroke) solid var(--ink);
+    background: none;
+    padding: 0 var(--space-5);
+    font-size: var(--fs-xs);
+    text-transform: uppercase;
+    letter-spacing: var(--track-caps);
+  }
+
+  .repere__liste:hover,
+  .repere__liste:focus-visible {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  /* Liste de tous les projets */
+  .list-dialog {
+    width: min(960px, calc(100vw - 2 * var(--space-6)));
+    max-height: calc(100vh - 2 * var(--space-6));
+    padding: 0;
+    border: var(--stroke) solid var(--ink);
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  .list-dialog::backdrop {
+    background: rgb(17 17 17 / 0.55);
+  }
+
+  .list-dialog__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: var(--space-5);
+    border-bottom: var(--stroke) solid var(--ink);
+  }
+
+  .list-dialog__head h2 {
+    font-size: var(--fs-xl);
+  }
+
+  .list-dialog__close {
+    border: 0;
+    background: none;
+    font-size: var(--fs-xs);
+  }
+
+  .list-dialog__cols,
+  .list-dialog__row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 10rem;
+    gap: var(--space-5);
+    padding: var(--space-3) var(--space-5);
+  }
+
+  .list-dialog__cols {
+    font-size: var(--fs-xs);
+    color: var(--ink-soft);
+    border-bottom: var(--stroke) solid var(--ink);
+  }
+
+  .list-dialog li {
+    border-bottom: var(--stroke) solid var(--line);
+  }
+
+  .list-dialog__title {
+    display: flex;
+    gap: var(--space-4);
+    align-items: baseline;
+  }
+
+  .list-dialog__num {
+    font-size: var(--fs-xs);
+    color: var(--ink-soft);
+    min-width: 3.5em;
+  }
+
+  .list-dialog__row:hover .trait,
+  .list-dialog__row:focus-visible .trait {
+    background-size: 100% var(--stroke);
+  }
+
+  @media (max-width: 1023px) {
+    .repere {
+      display: none;
+    }
+    .list-dialog__cols {
+      display: none;
+    }
+    .list-dialog__row {
+      grid-template-columns: 1fr;
+      gap: var(--space-1);
+    }
+  }
+</style>

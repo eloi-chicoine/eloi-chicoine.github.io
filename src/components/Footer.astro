@@ -1,0 +1,49 @@
+---
+import { profil } from '../data/profil';
+import { t, asset, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const annee = new Date().getFullYear();
+---
+
+<div class="band" aria-hidden="true"></div>
+<footer class="footer grid">
+  <p class="col-a footer__name">© {annee} {t(lang, 'footer.rights')}</p>
+  <ul class="col-bd footer__links">
+    <li><a class="trait" href={`mailto:${profil.email}`}>{profil.email}</a></li>
+    <li><a class="trait" href={profil.linkedin} rel="me noopener" target="_blank">LinkedIn</a></li>
+    <li><a class="trait" href={asset(profil.cv)} download>CV (PDF)</a></li>
+    <li class="footer__top"><a class="trait" href="#contenu">{t(lang, 'footer.top')}</a></li>
+  </ul>
+</footer>
+
+<style>
+  .footer {
+    padding-block: var(--space-5) var(--space-6);
+    font-size: var(--fs-s);
+  }
+
+  .footer__name {
+    padding-left: 16px;
+  }
+
+  .footer__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+  }
+
+  .footer__top {
+    margin-left: auto;
+  }
+
+  @media (max-width: 1023px) {
+    .footer__name {
+      padding-left: 0;
+    }
+  }
+</style>

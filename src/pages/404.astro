@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import { t, url } from '../i18n/utils';
+---
+
+<Base lang="fr" alternate={url('en', '/')} title={t('fr', 'notFound.title')}>
+  <section class="nf grid">
+    <div class="col-bd nf__body">
+      <p class="display nf__code">404</p>
+      <h1 class="display nf__title">{t('fr', 'notFound.title')}</h1>
+      <p lang="en">{t('en', 'notFound.title')}</p>
+      <p><a class="btn" href={url('fr', '/')}>{t('fr', 'notFound.back')}</a></p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf {
+    min-height: 60vh;
+    align-items: center;
+  }
+
+  .nf__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    align-items: flex-start;
+  }
+
+  .nf__code {
+    font-size: var(--fs-xxl);
+    color: var(--ink-soft);
+  }
+
+  .nf__title {
+    font-size: var(--fs-xl);
+  }
+</style>

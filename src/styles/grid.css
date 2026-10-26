@@ -1,0 +1,67 @@
+/* La grille du plan : mêmes colonnes pour tous les blocs du site. */
+.page {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: clip;
+}
+
+.grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: var(--grid-columns);
+}
+
+/* Zones de colonnes réutilisables */
+.col-a { grid-column: a; }
+.col-b { grid-column: b; }
+.col-c { grid-column: c; }
+.col-d { grid-column: d; }
+.col-ab { grid-column: a-start / b-end; }
+.col-cd { grid-column: c-start / d-end; }
+.col-bd { grid-column: b-start / d-end; }
+.col-ad { grid-column: a-start / d-end; }
+
+/* Bande horizontale à double trait (gouttière horizontale) */
+.band {
+  position: relative;
+  z-index: 1;
+  height: var(--gut);
+  border-top: var(--stroke) solid var(--line);
+  border-bottom: var(--stroke) solid var(--line);
+}
+
+/* Traits verticaux qui traversent toute la page */
+.grid-lines {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: grid;
+  grid-template-columns: var(--grid-columns);
+  pointer-events: none;
+}
+
+.grid-lines > span {
+  border-left: var(--stroke) solid var(--line);
+  border-right: var(--stroke) solid var(--line);
+}
+
+.grid-lines > :nth-child(1) { grid-column: g1; }
+.grid-lines > :nth-child(2) { grid-column: g2; }
+.grid-lines > :nth-child(3) { grid-column: g3; }
+.grid-lines > :nth-child(4) { grid-column: g4; }
+
+/* Mobile et tablette portrait (mode vertical) : une colonne, deux gouttières. */
+@media (max-width: 1023px) {
+  :root {
+    --grid-columns:
+      [m-start] 8px [m-end g1-start] 16px
+      [g1-end a-start b-start c-start d-start] minmax(0, 1fr)
+      [a-end b-end c-end d-end g2-start g3-start g4-start] 16px
+      [g2-end g3-end g4-end r-start] 0 [r-end];
+  }
+  .grid-lines > :nth-child(3),
+  .grid-lines > :nth-child(4) {
+    display: none;
+  }
+}

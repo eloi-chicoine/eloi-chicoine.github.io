@@ -1,0 +1,112 @@
+{
+  "meta": {
+    "title": "Eloi Chicoine — Portfolio",
+    "description": "Portfolio of Eloi Chicoine, multimedia student (BUT MMI, digital creation). Graphic design, video and web development. Looking for a digital creation internship from 12 April 2027."
+  },
+  "nav": {
+    "label": "Main navigation",
+    "about": "About",
+    "projects": "Projects",
+    "contact": "Contact",
+    "lang": "Français",
+    "langShort": "FR",
+    "home": "Home",
+    "chapters": "Chapters"
+  },
+  "hero": {
+    "welcome": "Welcome to my",
+    "title": "Portfolio",
+    "intro": "Second-year multimedia student (BUT MMI, digital creation track) at IUT du Limousin, France. I work across graphic design, video and web development.",
+    "stageLabel": "Looking for an internship",
+    "stageDate": "From 12 April 2027",
+    "stageSector": "Digital creation",
+    "stageMobility": "Willing to relocate anywhere in France",
+    "cv": "Download my CV (PDF, in French)",
+    "photoAlt": "Black and white portrait of Eloi Chicoine",
+    "toProjects": "Go to projects",
+    "photoPending": "Photo coming soon"
+  },
+  "panels": {
+    "label": "Learn more",
+    "close": "Close",
+    "me": {
+      "button": "Me",
+      "title": "Identity",
+      "p1": "Eloi Chicoine, second-year student in Multimedia and Internet (BUT MMI) in Limoges.",
+      "p2": "Before MMI, I spent a year in PASS (health studies) after a science baccalaureate in maths and physics-chemistry with advanced maths. I kept a taste for method, which I now put to work on images.",
+      "p3": "Outside class: video games, films and series, photography, music.",
+      "languages": "English C1 · Spanish B2",
+      "linkedin": "LinkedIn"
+    },
+    "tools": {
+      "button": "The tools I use",
+      "title": "Tools",
+      "design": "Design",
+      "video": "Video and sound",
+      "web": "Web",
+      "orga": "Organisation"
+    },
+    "path": {
+      "button": "My path",
+      "title": "Path",
+      "items": [
+        {
+          "date": "Since 2025",
+          "text": "BUT MMI, digital creation track — IUT du Limousin, Limoges"
+        },
+        {
+          "date": "2024 – 2025",
+          "text": "PASS, health sciences — University of Limoges"
+        },
+        {
+          "date": "2024",
+          "text": "Science baccalaureate with honours, maths / physics-chemistry, advanced maths"
+        }
+      ]
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "colTitle": "Project",
+    "colUnivers": "Field",
+    "colDate": "Date",
+    "back": "Back to projects",
+    "link": "See the project",
+    "tools": "Tools",
+    "date": "Date",
+    "gallery": "Project images",
+    "pending": "Image coming soon",
+    "next": "Next project",
+    "listOpen": "List",
+    "listTitle": "All projects",
+    "lead": "My work:",
+    "more": "See all {n} projects"
+  },
+  "univers": {
+    "graphisme": "Graphic design",
+    "video": "Video",
+    "web": "Web development"
+  },
+  "contact": {
+    "title": "Contact",
+    "intro": "An internship offer, a question about a project: write to me here.",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send",
+    "sending": "Sending…",
+    "success": "Message sent. Thank you, I will get back to you soon.",
+    "error": "Sending failed. You can write to me directly at",
+    "subject": "New message from the portfolio",
+    "direct": "Or directly",
+    "phone": "Phone"
+  },
+  "footer": {
+    "rights": "Eloi Chicoine",
+    "top": "Back to top"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "back": "Back to home"
+  }
+}

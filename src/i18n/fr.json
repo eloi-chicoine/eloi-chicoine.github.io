@@ -1,0 +1,112 @@
+{
+  "meta": {
+    "title": "Eloi Chicoine — Portfolio",
+    "description": "Portfolio d'Eloi Chicoine, étudiant en BUT MMI création numérique. Design graphique, vidéo et développement web. Recherche un stage en création numérique à partir du 12 avril 2027."
+  },
+  "nav": {
+    "label": "Navigation principale",
+    "about": "À propos",
+    "projects": "Projets",
+    "contact": "Contact",
+    "lang": "English",
+    "langShort": "EN",
+    "home": "Accueil",
+    "chapters": "Chapitres"
+  },
+  "hero": {
+    "welcome": "Bienvenue sur mon",
+    "title": "Portfolio",
+    "intro": "Étudiant en 2e année de BUT MMI, parcours création numérique, à l'IUT du Limousin. Je travaille entre design graphique, vidéo et développement web.",
+    "stageLabel": "Recherche de stage",
+    "stageDate": "À partir du 12 avril 2027",
+    "stageSector": "Création numérique",
+    "stageMobility": "Mobile partout en France",
+    "cv": "Télécharger mon CV (PDF)",
+    "photoAlt": "Portrait d'Eloi Chicoine en noir et blanc",
+    "toProjects": "Aller aux projets",
+    "photoPending": "Photo à venir"
+  },
+  "panels": {
+    "label": "En savoir plus",
+    "close": "Fermer",
+    "me": {
+      "button": "Moi",
+      "title": "Identité",
+      "p1": "Eloi Chicoine, en 2e année de BUT Métiers du Multimédia et de l'Internet à Limoges.",
+      "p2": "Avant MMI, j'ai fait une année de PASS (santé) après un bac maths / physique-chimie avec maths expertes. J'en garde le goût de la méthode, que je mets maintenant au service de l'image.",
+      "p3": "En dehors des cours : jeux vidéo, cinéma et séries, photographie, musique.",
+      "languages": "Anglais C1 · espagnol B2",
+      "linkedin": "LinkedIn"
+    },
+    "tools": {
+      "button": "Les outils que j'utilise",
+      "title": "Outils",
+      "design": "Design",
+      "video": "Vidéo et son",
+      "web": "Web",
+      "orga": "Organisation"
+    },
+    "path": {
+      "button": "Mon parcours",
+      "title": "Parcours",
+      "items": [
+        {
+          "date": "Depuis 2025",
+          "text": "BUT MMI, parcours création numérique — IUT du Limousin, Limoges"
+        },
+        {
+          "date": "2024 – 2025",
+          "text": "PASS, option sciences pour la santé — Université de Limoges"
+        },
+        {
+          "date": "2024",
+          "text": "Bac général mention bien, maths / physique-chimie, maths expertes"
+        }
+      ]
+    }
+  },
+  "projects": {
+    "title": "Projets",
+    "colTitle": "Projet",
+    "colUnivers": "Univers",
+    "colDate": "Date",
+    "back": "Retour aux projets",
+    "link": "Voir le projet",
+    "tools": "Outils",
+    "date": "Date",
+    "gallery": "Images du projet",
+    "pending": "Image à venir",
+    "next": "Projet suivant",
+    "listOpen": "Liste",
+    "listTitle": "Tous les projets",
+    "lead": "Mes productions :",
+    "more": "Voir les {n} projets"
+  },
+  "univers": {
+    "graphisme": "Design graphique",
+    "video": "Vidéo",
+    "web": "Développement web"
+  },
+  "contact": {
+    "title": "Contact",
+    "intro": "Une proposition de stage, une question sur un projet : écrivez-moi ici.",
+    "name": "Nom",
+    "email": "E-mail",
+    "message": "Message",
+    "send": "Envoyer",
+    "sending": "Envoi…",
+    "success": "Message envoyé. Merci, je reviens vers vous rapidement.",
+    "error": "L'envoi n'a pas fonctionné. Vous pouvez m'écrire directement à",
+    "subject": "Nouveau message depuis le portfolio",
+    "direct": "Ou directement",
+    "phone": "Téléphone"
+  },
+  "footer": {
+    "rights": "Eloi Chicoine",
+    "top": "Haut de page"
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "back": "Retour à l'accueil"
+  }
+}

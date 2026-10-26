@@ -1,0 +1,34 @@
+# SAÉ 2.04 — Construire sa présence en ligne (BUT MMI 1)
+titre:
+  fr: "Portfolio et personal branding"
+  en: "Portfolio and personal branding"
+date: "2026-04"
+univers: graphisme
+resume:
+  fr: "Moodboard, wireframes et maquettes haute fidélité de mon portfolio sur Figma."
+  en: "Moodboard, wireframes and high-fidelity mock-ups of my portfolio in Figma."
+description:
+  fr: |
+    Se mettre dans la peau d'un jeune freelance : auditer mon e-réputation, définir un positionnement, optimiser mon profil LinkedIn, puis concevoir l'interface de mon propre portfolio.
+
+    Après un moodboard pour fixer la direction artistique, j'ai structuré l'architecture de l'information en wireframes basse fidélité sur Figma, puis réalisé les maquettes haute fidélité responsive (desktop et mobile).
+
+    Le projet a été présenté en Pecha Kucha : 15 diapositives qui défilent seules toutes les 20 secondes, soit 5 minutes pile.
+  en: |
+    Acting as a young freelancer: audit my online reputation, define a positioning, optimise my LinkedIn profile, then design the interface of my own portfolio.
+
+    After a moodboard to set the art direction, I structured the information architecture with low-fidelity wireframes in Figma, then designed responsive high-fidelity mock-ups (desktop and mobile).
+
+    The project was presented as a Pecha Kucha: 15 slides advancing automatically every 20 seconds, exactly 5 minutes.
+outils: ["Figma", "Photoshop"]
+couverture: ../../assets/projets/portfolio-personal-branding/01-maquette.jpg
+images:
+  - src: ../../assets/projets/portfolio-personal-branding/01-maquette.jpg
+    alt: { fr: "Maquette Figma du portfolio : portrait, citation et grille de projets", en: "Figma mock-up of the portfolio: portrait, quote and project grid" }
+  - src: ../../assets/projets/portfolio-personal-branding/02-maquette-suite.jpg
+    alt: { fr: "Suite de la maquette Figma du portfolio", en: "Continuation of the Figma portfolio mock-up" }
+  - src: ../../assets/projets/portfolio-personal-branding/03-linkedin.jpg
+    alt: { fr: "Profil LinkedIn optimisé", en: "Optimised LinkedIn profile" }
+  - src: ../../assets/projets/portfolio-personal-branding/04-behance.jpg
+    alt: { fr: "Profil Behance", en: "Behance profile" }
+ordre: 2

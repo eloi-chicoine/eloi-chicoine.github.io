@@ -1,0 +1,164 @@
+---
+// Formulaire envoyé par Web3Forms (aucun serveur). Clé dans .env : PUBLIC_WEB3FORMS_KEY
+import { profil } from '../data/profil';
+import { t, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const cle = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? '';
+---
+
+<div class="band" aria-hidden="true"></div>
+
+<section class="contact grid" id="contact" aria-labelledby="contact-title">
+  <div class="contact__intro col-a">
+    <h2 id="contact-title" class="contact__title display">{t(lang, 'contact.title')}</h2>
+    <p>{t(lang, 'contact.intro')}</p>
+    <p class="contact__direct">
+      <span class="caps">{t(lang, 'contact.direct')}</span>
+      <a class="trait" href={`mailto:${profil.email}`}>{profil.email}</a>
+      <a class="trait" href={`tel:${profil.telephoneLien}`} aria-label={`${t(lang, 'contact.phone')} ${profil.telephone}`}>{profil.telephone}</a>
+      <a class="trait" href={profil.linkedin} rel="me noopener" target="_blank">LinkedIn</a>
+    </p>
+  </div>
+
+  <form
+    class="form col-bd"
+    action="https://api.web3forms.com/submit"
+    method="POST"
+    data-contact-form
+    data-sending={t(lang, 'contact.sending')}
+  >
+    <input type="hidden" name="access_key" value={cle} />
+    <input type="hidden" name="subject" value={t(lang, 'contact.subject')} />
+    <input type="hidden" name="from_name" value="Portfolio" />
+    <input type="checkbox" name="botcheck" class="visually-hidden" tabindex="-1" autocomplete="off" />
+
+    <div class="form__row">
+      <label for="f-nom" class="caps">{t(lang, 'contact.name')}</label>
+      <input id="f-nom" name="name" type="text" autocomplete="name" required />
+    </div>
+    <div class="form__row">
+      <label for="f-email" class="caps">{t(lang, 'contact.email')}</label>
+      <input id="f-email" name="email" type="email" autocomplete="email" required />
+    </div>
+    <div class="form__row">
+      <label for="f-message" class="caps">{t(lang, 'contact.message')}</label>
+      <textarea id="f-message" name="message" rows="6" required></textarea>
+    </div>
+
+    <div class="form__end">
+      <button class="btn" type="submit">{t(lang, 'contact.send')}</button>
+      <p class="form__status" role="status" aria-live="polite" data-status>
+        <span data-success hidden>{t(lang, 'contact.success')}</span>
+        <span data-error hidden>
+          {t(lang, 'contact.error')} <a class="trait" href={`mailto:${profil.email}`}>{profil.email}</a>.
+        </span>
+      </p>
+    </div>
+  </form>
+</section>
+
+<script>
+  import { initContact } from '../scripts/contact';
+  initContact();
+</script>
+
+<style>
+  .contact {
+    padding-block: var(--space-7) var(--space-8);
+  }
+
+  :global(.is-h) .contact {
+    flex: 1;
+    align-content: center;
+  }
+
+  .contact__intro {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding-left: 16px;
+    padding-right: var(--space-5);
+  }
+
+  .contact__title {
+    font-size: var(--fs-xxl);
+  }
+
+  .contact__direct {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+  }
+
+  .contact__direct .caps {
+    font-size: var(--fs-xs);
+    color: var(--ink-soft);
+  }
+
+  .form {
+    border: var(--stroke) solid var(--ink);
+    background: var(--paper);
+    align-self: start;
+  }
+
+  .form__row {
+    display: grid;
+    grid-template-columns: 9rem 1fr;
+    border-bottom: var(--stroke) solid var(--line);
+  }
+
+  .form__row label {
+    padding: var(--space-4);
+    font-size: var(--fs-xs);
+    border-right: var(--stroke) solid var(--line);
+  }
+
+  .form input,
+  .form textarea {
+    border: 0;
+    background: transparent;
+    padding: var(--space-4);
+    width: 100%;
+    resize: vertical;
+  }
+
+  .form input:focus-visible,
+  .form textarea:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: -2px;
+  }
+
+  .form__end {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    padding: var(--space-4);
+  }
+
+  .form__status {
+    font-size: var(--fs-s);
+  }
+
+  @media (max-width: 1023px) {
+    .contact {
+      row-gap: var(--space-6);
+    }
+    .contact__intro {
+      padding: 0;
+    }
+    .form__row {
+      grid-template-columns: 1fr;
+    }
+    .form__row label {
+      border-right: 0;
+      padding-bottom: 0;
+    }
+  }
+</style>

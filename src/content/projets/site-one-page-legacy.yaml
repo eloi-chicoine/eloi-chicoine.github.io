@@ -1,0 +1,34 @@
+# SAÉ 1.05 — Produire un site web (BUT MMI 1)
+titre:
+  fr: "Site One Page — Legacy"
+  en: "One-page website — Legacy"
+date: "2025-12"
+univers: web
+resume:
+  fr: "Intégration HTML / CSS, composants générés en JavaScript depuis du JSON, mise en ligne."
+  en: "HTML / CSS build, components generated in JavaScript from JSON, deployed online."
+description:
+  fr: |
+    Rôle d'intégrateur web junior : concevoir et mettre en ligne le site « One Page » d'une start-up, en construisant des composants réutilisables.
+
+    Intégration HTML et CSS en mobile-first à partir d'un UI Kit Figma (header, hero, navigation), avec une arborescence de fichiers stricte et un balisage sémantique. Puis séparation du fond et de la forme : pour chaque composant, un template HTML/CSS à balises {{…}}, un fichier de données JSON et un script JavaScript qui les relie.
+
+    Cette mécanique a généré trois sites (Audiophile, Bonbon et ma propre start-up, Legacy), tous hébergés sur un serveur avec une URL publique.
+  en: |
+    Junior web developer role: design and deploy a start-up's one-page website, built from reusable components.
+
+    Mobile-first HTML and CSS build from a Figma UI kit (header, hero, navigation), with a strict file structure and semantic markup. Then content and layout were separated: for each component, an HTML/CSS template with {{…}} tags, a JSON data file and a JavaScript script linking them.
+
+    This system generated three websites (Audiophile, Bonbon and my own start-up, Legacy), all hosted on a server with a public URL.
+outils: ["HTML / CSS", "JavaScript", "JSON", "Figma"]
+couverture: ../../assets/projets/site-one-page-legacy/01-accueil.jpg
+images:
+  - src: ../../assets/projets/site-one-page-legacy/01-accueil.jpg
+    alt: { fr: "Page d'accueil du site Legacy", en: "Legacy website home page" }
+  - src: ../../assets/projets/site-one-page-legacy/02-about.jpg
+    alt: { fr: "Section « About us » du site Legacy", en: "\"About us\" section of the Legacy website" }
+  - src: ../../assets/projets/site-one-page-legacy/03-probleme-solution.jpg
+    alt: { fr: "Sections problème et solution", en: "Problem and solution sections" }
+  - src: ../../assets/projets/site-one-page-legacy/04-fonctionnement.jpg
+    alt: { fr: "Section « Comment ça marche »", en: "\"How it works\" section" }
+ordre: 1

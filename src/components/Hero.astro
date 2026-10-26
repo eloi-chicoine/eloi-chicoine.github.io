@@ -1,0 +1,224 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import InfoPanels from './InfoPanels.astro';
+import Spiral from './Spiral.astro';
+import { profil } from '../data/profil';
+import { t, asset, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+// Déposer les photos dans src/assets/photos/ avec ces noms : elles s'afficheront seules.
+const photos = import.meta.glob<{ default: ImageMetadata }>('../assets/photos/*.{jpg,jpeg,png,webp}', {
+  eager: true,
+});
+const trouver = (nom: string) =>
+  Object.entries(photos).find(([chemin]) => chemin.split('/').pop()!.startsWith(nom))?.[1].default;
+const portrait = trouver('portrait');
+---
+
+<section class="hero grid" aria-labelledby="hero-title">
+  <figure class:list={['hero__photo col-a', { 'hero__photo--vide': !portrait }]} data-intro>
+    {
+      portrait ? (
+        <Image src={portrait} alt={t(lang, 'hero.photoAlt')} widths={[420, 840, 1086]} sizes="30vw" loading="eager" />
+      ) : (
+        <figcaption class="hero__pending caps">{t(lang, 'hero.photoPending')}</figcaption>
+      )
+    }
+  </figure>
+
+  <div class="hero__text col-b">
+    <p class="hero__welcome display" data-intro>{t(lang, 'hero.welcome')}</p>
+    <h1 id="hero-title" class="hero__title display" data-intro>{t(lang, 'hero.title')}</h1>
+
+    <p class="hero__intro" data-intro>{t(lang, 'hero.intro')}</p>
+
+    <div class="stage" data-intro>
+      <p class="stage__label display">{t(lang, 'hero.stageLabel')}</p>
+      <ul class="stage__list">
+        <li>{t(lang, 'hero.stageDate')}</li>
+        <li>{t(lang, 'hero.stageSector')}</li>
+        <li>{t(lang, 'hero.stageMobility')}</li>
+      </ul>
+    </div>
+
+    <a class="btn hero__cv" href={asset(profil.cv)} download data-intro>
+      {t(lang, 'hero.cv')}
+    </a>
+  </div>
+
+  <InfoPanels lang={lang} />
+
+  <div class="hero__band band" aria-hidden="true"></div>
+
+  <Spiral />
+
+
+  <a class="hero__arrow col-d" href="#projets" aria-label={t(lang, 'hero.toProjects')} data-intro>
+    <svg viewBox="0 0 50 50" width="50" height="50" aria-hidden="true">
+      <path d="M2 25H47M26 4l21 21-21 21" fill="none" stroke="currentColor" stroke-width="1.2"></path>
+    </svg>
+  </a>
+</section>
+
+<style>
+  .hero {
+    min-height: calc(100svh - var(--header-h) - var(--gut));
+    grid-template-rows: minmax(560px, 1fr) var(--gut) 19.5vw;
+  }
+
+  /* Grande photo N&B : de la ligne des pictos jusqu'au bas de l'écran */
+  .hero__photo {
+    grid-row: 1 / 4;
+    margin-top: 83px;
+    background: var(--paper);
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+  }
+
+  .hero__photo :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 15%;
+    /* Photo détourée (fond transparent) et déjà en N&B : le papier apparaît derrière. */
+  }
+
+  .hero__photo--vide {
+    background: var(--placeholder);
+  }
+
+
+  .hero__pending {
+    position: absolute;
+    left: var(--space-4);
+    bottom: var(--space-4);
+    color: var(--ink-soft);
+  }
+
+  .hero__text {
+    grid-row: 1;
+    padding-top: 59px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero__welcome {
+    font-size: var(--fs-s);
+  }
+
+  .hero__title {
+    font-size: var(--fs-xxl);
+    margin-top: var(--space-2);
+  }
+
+  .hero__intro {
+    margin-top: var(--space-6);
+    max-width: 36ch;
+  }
+
+  /* Annonce de stage : un cartouche de plan, cadre fin */
+  .stage {
+    margin-top: var(--space-6);
+    border: var(--stroke) solid var(--ink);
+    background: var(--paper);
+    width: min(100%, 26rem);
+  }
+
+  .stage__label {
+    font-size: var(--fs-m);
+    padding: var(--space-3) var(--space-4);
+    border-bottom: var(--stroke) solid var(--ink);
+  }
+
+  .stage__list li {
+    padding: var(--space-2) var(--space-4);
+  }
+
+  .stage__list li + li {
+    border-top: var(--stroke) solid var(--line);
+  }
+
+  .stage__list li:first-child {
+    font-weight: 600;
+  }
+
+  .hero__cv {
+    margin-top: var(--space-5);
+    background: var(--paper);
+  }
+
+  .hero__band {
+    grid-column: m-start / r-end;
+    grid-row: 2;
+    z-index: 0;
+  }
+
+  .hero__arrow {
+    grid-row: 3;
+    align-self: end;
+    justify-self: end;
+    margin-bottom: 16px;
+    margin-right: calc(-1 * var(--col-r) + 12px);
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Desktop horizontal : l'accueil tient exactement dans l'écran */
+  :global(.is-h) .hero {
+    flex: 1;
+    min-height: 0;
+    grid-template-rows: minmax(0, 1fr) var(--gut) min(19.5vw, 22vh);
+  }
+
+  /* La bande du repère occupe le bas de l'écran : la flèche passe au-dessus */
+  :global(.is-h) .hero__arrow {
+    margin-bottom: 52px;
+  }
+
+  /* Écrans peu hauts (ex. 1440 × 900) : on resserre le texte */
+  @media (max-height: 960px) {
+    :global(.is-h) .hero__text {
+      padding-top: 40px;
+    }
+    :global(.is-h) .hero__intro,
+    :global(.is-h) .stage {
+      margin-top: var(--space-5);
+    }
+    :global(.is-h) .stage__list li {
+      padding-block: var(--space-1);
+    }
+    :global(.is-h) .hero__cv {
+      margin-top: var(--space-4);
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .hero {
+      grid-template-rows: auto;
+      min-height: 0;
+      row-gap: var(--space-6);
+      padding-bottom: var(--space-6);
+    }
+    .hero__photo {
+      grid-row: auto;
+      margin-top: var(--space-5);
+      aspect-ratio: 4 / 5;
+    }
+    .hero__text {
+      grid-row: auto;
+      padding-top: 0;
+    }
+    .hero__band,
+    .hero__arrow {
+      display: none;
+    }
+  }
+</style>

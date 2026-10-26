@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.astro/
+.env
+.DS_Store
+# Dossier de SAÉ (source des projets, ne pas publier)
+Chicoine_Portfolio*.pdf

@@ -1,0 +1,30 @@
+# SAÉ 2.03 — Concevoir un site avec une source de données (BUT MMI 1)
+titre:
+  fr: "Plateforme de VOD"
+  en: "Video-on-demand platform"
+date: "2026-06"
+univers: web
+resume:
+  fr: "Une application de vidéo à la demande complète : front, back-office, PHP et MySQL."
+  en: "A complete video-on-demand app: front end, admin, PHP and MySQL."
+description:
+  fr: |
+    Projet individuel de fin d'année : développer de A à Z une plateforme de vidéo à la demande, avec deux interfaces. Une application pour les utilisateurs (catalogue, favoris, filtres) et un back-office pour les administrateurs (ajout de films, modération, statistiques).
+
+    Côté front, HTML, CSS et JavaScript, avec mon propre mini-framework CSS (classes utilitaires et composants BEM). Côté back, PHP et MySQL : base de données modélisée avec Looping pour les films, catégories et profils. Des requêtes HTTP en JavaScript interrogent le serveur PHP et génèrent l'affichage des listes et des statistiques.
+
+    Développement sur le serveur de l'IUT via Remote SSH dans VS Code, versionné sur GitHub.
+  en: |
+    End-of-year solo project: build a video-on-demand platform from scratch, with two interfaces. An app for users (catalogue, favourites, filters) and an admin back office (adding films, moderation, statistics).
+
+    Front end in HTML, CSS and JavaScript, with my own mini CSS framework (utility classes and BEM components). Back end in PHP and MySQL: database modelled with Looping for films, categories and profiles. JavaScript HTTP requests query the PHP server and render the lists and statistics.
+
+    Developed on the university server via Remote SSH in VS Code, versioned on GitHub.
+outils: ["JavaScript", "PHP", "MySQL", "Git / GitHub"]
+couverture: ../../assets/projets/plateforme-vod/01-catalogue.jpg
+images:
+  - src: ../../assets/projets/plateforme-vod/01-catalogue.jpg
+    alt: { fr: "Catalogue de films de la plateforme, avec carrousel et favoris", en: "Film catalogue of the platform, with carousel and favourites" }
+  - src: ../../assets/projets/plateforme-vod/02-base-de-donnees.jpg
+    alt: { fr: "Table des films dans la base de données MySQL", en: "Films table in the MySQL database" }
+ordre: 2

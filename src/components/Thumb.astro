@@ -1,0 +1,65 @@
+---
+// Image de projet en N&B (couleur au survol du lien parent), ou rectangle gris tant qu'il n'y a pas d'image.
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  src?: ImageMetadata;
+  alt: string;
+  /** Texte du rectangle gris quand il n'y a pas d'image */
+  label: string;
+  sizes?: string;
+  class?: string;
+  /** true : image toujours en couleur (galerie des pages projet) */
+  couleur?: boolean;
+  /** 'eager' pour les vignettes de la piste horizontale : en 'lazy', le navigateur ne voit pas
+      toujours qu'elles entrent à l'écran quand la piste glisse (transform). */
+  loading?: 'lazy' | 'eager';
+}
+
+const { src, alt, label, sizes = '33vw', class: className, couleur = false, loading = 'lazy' } = Astro.props;
+---
+
+<div class:list={['thumb', className, { 'thumb--couleur': couleur }]}>
+  {
+    src ? (
+      <Image src={src} alt={alt} widths={[480, 960, 1440]} sizes={sizes} loading={loading} />
+    ) : (
+      <span class="thumb__label display" aria-hidden="true">
+        {label}
+      </span>
+    )
+  }
+</div>
+
+<style>
+  .thumb {
+    position: relative;
+    overflow: hidden;
+    background: var(--ph-bg, var(--placeholder));
+    height: 100%;
+  }
+
+  .thumb :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top; /* captures d'écran et portraits : on garde le haut */
+    filter: grayscale(1);
+    transition: filter 0.5s var(--ease-draw);
+  }
+
+  .thumb--couleur :global(img),
+  :global(a:hover) > .thumb :global(img),
+  :global(a:focus-visible) > .thumb :global(img) {
+    filter: grayscale(0);
+  }
+
+  .thumb__label {
+    position: absolute;
+    left: var(--space-4);
+    bottom: var(--space-3);
+    font-size: var(--fs-xl);
+    color: var(--ph-ink, #b9b5ac);
+  }
+</style>

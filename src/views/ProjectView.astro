@@ -1,0 +1,263 @@
+---
+// Gabarit unique des pages projet : titre + date, description, lien, vidéo, grille d'images.
+import Base from '../layouts/Base.astro';
+import Thumb from '../components/Thumb.astro';
+import { getProjets, numero, suivant, indexUnivers, type Projet } from '../lib/projets';
+import { t, tr, urlAccueil, urlProjet, autreLangue, formatDate, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  projet: Projet;
+}
+
+const { lang, projet } = Astro.props;
+const { data } = projet;
+const projets = await getProjets();
+const prochain = suivant(projets, projet);
+const titre = tr(lang, data.titre);
+const paragraphes = tr(lang, data.description).split(/\n\s*\n/);
+
+// YouTube / Vimeo → lecteur intégré ; sinon simple lien
+function embed(lien?: string) {
+  if (!lien) return null;
+  const yt = lien.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]{11})/);
+  if (yt) return `https://www.youtube-nocookie.com/embed/${yt[1]}`;
+  const vimeo = lien.match(/vimeo\.com\/(\d+)/);
+  if (vimeo) return `https://player.vimeo.com/video/${vimeo[1]}`;
+  return null;
+}
+const lecteur = embed(data.video);
+
+// Sans images, on garde 4 rectangles gris pour montrer la mise en page
+const images = data.images.length
+  ? data.images.map((img) => ({ src: img.src, alt: tr(lang, img.alt) }))
+  : Array.from({ length: 4 }, () => ({ src: undefined, alt: '' }));
+---
+
+<Base
+  lang={lang}
+  alternate={urlProjet(autreLangue(lang), projet.id)}
+  title={titre}
+  description={tr(lang, data.resume)}
+>
+  <article class="project">
+    <header class="project__head grid">
+      <div class="project__aside col-a">
+        <a class="trait caps project__back" href={urlAccueil(lang, data.univers)}>{t(lang, 'projects.back')}</a>
+        <dl class="meta">
+          <div>
+            <dt class="caps">{indexUnivers(data.univers)}.{numero(projets, projet)}</dt>
+            <dd>{t(lang, `univers.${data.univers}`)}</dd>
+          </div>
+          <div>
+            <dt class="caps">{t(lang, 'projects.date')}</dt>
+            <dd><time datetime={data.date}>{formatDate(lang, data.date)}</time></dd>
+          </div>
+          {
+            data.outils.length > 0 && (
+              <div>
+                <dt class="caps">{t(lang, 'projects.tools')}</dt>
+                <dd>{data.outils.join(' · ')}</dd>
+              </div>
+            )
+          }
+        </dl>
+      </div>
+
+      <div class="project__main col-bd">
+        <h1 class="project__title display">{titre}</h1>
+        <div class="project__text">
+          {paragraphes.map((p) => <p>{p}</p>)}
+        </div>
+        {
+          (data.lien || (data.video && !lecteur)) && (
+            <p>
+              <a class="btn" href={data.lien ?? data.video} target="_blank" rel="noopener">
+                {t(lang, 'projects.link')}
+              </a>
+            </p>
+          )
+        }
+      </div>
+    </header>
+
+    {
+      lecteur && (
+        <div class="grid project__video">
+          <div class="col-ad video">
+            <iframe
+              src={lecteur}
+              title={titre}
+              loading="lazy"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowfullscreen
+            />
+          </div>
+        </div>
+      )
+    }
+
+    <section class="grid" aria-label={t(lang, 'projects.gallery')}>
+      <ul class="gallery">
+        {
+          images.map((img, i) => (
+            <li class="gallery__item">
+              <Thumb
+                src={img.src}
+                alt={img.alt}
+                label={img.src ? '' : t(lang, 'projects.pending')}
+                sizes={i === 0 ? '95vw' : '34vw'}
+                couleur
+              />
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    {
+      prochain && prochain.id !== projet.id && (
+        <nav class="grid project__next" aria-label={t(lang, 'projects.next')}>
+          <a class="col-bd next" href={urlProjet(lang, prochain.id)}>
+            <span class="caps next__label">{t(lang, 'projects.next')}</span>
+            <span class="display next__title">
+              <span class="trait">{tr(lang, prochain.data.titre)}</span>
+            </span>
+          </a>
+        </nav>
+      )
+    }
+  </article>
+</Base>
+
+<style>
+  .project__head {
+    padding-block: var(--space-7);
+  }
+
+  .project__aside {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    padding-left: 16px;
+    padding-right: var(--space-5);
+  }
+
+  .project__back {
+    font-size: var(--fs-xs);
+    width: fit-content;
+  }
+
+  .meta {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .meta dt {
+    font-size: var(--fs-xs);
+    color: var(--ink-soft);
+  }
+
+  .project__main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    align-items: flex-start;
+  }
+
+  .project__title {
+    font-size: var(--fs-xxl);
+  }
+
+  .project__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    max-width: 62ch;
+    background: var(--paper);
+  }
+
+  .project__video {
+    padding-bottom: var(--space-6);
+  }
+
+  .video {
+    aspect-ratio: 16 / 9;
+    background: var(--ink);
+  }
+
+  .video iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  /* Première image en grand, puis 3 par ligne sur les colonnes A, B, C+D */
+  .gallery {
+    grid-column: m-start / r-end;
+    display: grid;
+    grid-template-columns: subgrid;
+    row-gap: var(--gut);
+  }
+
+  .gallery__item {
+    height: clamp(200px, 22vw, 380px);
+  }
+
+  .gallery__item:nth-child(1) {
+    grid-column: a-start / d-end;
+    height: clamp(280px, 42vw, 720px);
+  }
+  .gallery__item:nth-child(3n + 2) { grid-column: a; }
+  .gallery__item:nth-child(3n + 3) { grid-column: b; }
+  .gallery__item:nth-child(3n + 4) { grid-column: c-start / d-end; }
+
+  .gallery__item :global(.thumb__label) {
+    font-size: var(--fs-s);
+  }
+
+  .project__next {
+    padding-block: var(--space-8) var(--space-7);
+  }
+
+  .next {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    width: fit-content;
+    background: var(--paper);
+  }
+
+  .next__label {
+    font-size: var(--fs-xs);
+    color: var(--ink-soft);
+  }
+
+  .next__title {
+    font-size: var(--fs-xl);
+  }
+
+  .next:hover .trait,
+  .next:focus-visible .trait {
+    background-size: 100% var(--stroke);
+  }
+
+  @media (max-width: 1023px) {
+    .project__aside {
+      padding: 0;
+    }
+    .project__head {
+      row-gap: var(--space-6);
+    }
+    /* Titre et texte d'abord, informations ensuite */
+    .project__main {
+      grid-row: 1;
+    }
+    .project__aside {
+      grid-row: 2;
+    }
+    .gallery__item:nth-child(n) {
+      grid-column: a;
+    }
+  }
+</style>

@@ -1,0 +1,34 @@
+# SAÉ 1.03 — Produire les éléments d'une communication visuelle (BUT MMI 1)
+titre:
+  fr: "Stickers hard skills / soft skills"
+  en: "Hard skills / soft skills stickers"
+date: "2025-10"
+univers: graphisme
+resume:
+  fr: "Deux planches de dix stickers : mes compétences en vectoriel et en photomontage."
+  en: "Two sheets of ten stickers: my skills in vector and in photomontage."
+description:
+  fr: |
+    Première SAÉ de l'année : représenter cinq hard skills et cinq soft skills, ainsi qu'un avatar, sous forme de stickers numériques et imprimables. Chaque compétence devait trouver une métaphore visuelle lisible sans texte.
+
+    J'ai d'abord analysé deux artistes : l'illustrateur Wood pour le vectoriel (formes géométriques, couleurs unies) et Jean Lecointre pour le matriciel (photomontage, textures). La première planche est réalisée dans Illustrator à la manière de Wood, la seconde dans Photoshop à la manière de Lecointre (détourage, modes de fusion).
+
+    Cahier des charges : plans de travail de 2000 × 2000 px, polices vectorisées, et choix RVB ou CMJN selon la diffusion web ou impression.
+  en: |
+    First project of the year: show five hard skills and five soft skills, plus an avatar, as digital and printable stickers. Each skill needed a visual metaphor that reads without text.
+
+    I first studied two artists: illustrator Wood for vector work (geometric shapes, flat colours) and Jean Lecointre for raster work (photomontage, textures). The first sheet was made in Illustrator in Wood's style, the second in Photoshop in Lecointre's style (cut-outs, blend modes).
+
+    Brief: 2000 × 2000 px artboards, outlined fonts, and RGB or CMYK depending on web or print use.
+outils: ["Illustrator", "Photoshop"]
+couverture: ../../assets/projets/stickers-competences/01-vectoriel.jpg
+images:
+  - src: ../../assets/projets/stickers-competences/01-vectoriel.jpg
+    alt: { fr: "Planche de stickers vectoriels, personnages et pictogrammes dans des cercles de couleur", en: "Sheet of vector stickers, characters and pictograms in coloured circles" }
+  - src: ../../assets/projets/stickers-competences/02-matriciel.jpg
+    alt: { fr: "Planche de stickers en photomontage", en: "Sheet of photomontage stickers" }
+  - src: ../../assets/projets/stickers-competences/03-analyse-wood.jpg
+    alt: { fr: "Planche d'analyse du style de l'illustrateur Wood", en: "Analysis board of illustrator Wood's style" }
+  - src: ../../assets/projets/stickers-competences/04-analyse-lecointre.jpg
+    alt: { fr: "Planche d'analyse du style de Jean Lecointre", en: "Analysis board of Jean Lecointre's style" }
+ordre: 1

@@ -1,0 +1,328 @@
+---
+// Les trois univers. Chaque chapitre tient en un écran : sa scène Affinity en fond
+// (src/assets/svg/scene-*.svg), la phrase « Mes productions : … », et ses projets en grille de 3 colonnes
+// (2 lignes pour 6 projets ; la grille reste incomplète s'il y en a moins).
+import Thumb from './Thumb.astro';
+import GridLines from './GridLines.astro';
+import sceneGraphisme from '../assets/svg/scene-graphisme.svg?raw';
+import sceneVideo from '../assets/svg/scene-video.svg?raw';
+import sceneWeb from '../assets/svg/scene-web.svg?raw';
+import { getProjets, parUnivers, numero, indexUnivers } from '../lib/projets';
+import { t, tr, urlProjet, formatDate, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const scenes = { graphisme: sceneGraphisme, video: sceneVideo, web: sceneWeb };
+const projets = await getProjets();
+const chapitres = parUnivers(projets).filter((c) => c.projets.length);
+// Découpe en mots pour l'animation (chaque mot monte depuis un masque)
+const mots = (texte: string) => texte.split(' ');
+---
+
+<div class="chapters" id="projets">
+  {
+    chapitres.map(({ univers, projets: liste }) => (
+      <section
+        class={`chapter grid chapter--${univers}`}
+        id={univers}
+        data-chapter={univers}
+        data-chapter-reveal
+        aria-labelledby={`chap-${univers}`}
+      >
+        <div class="chapter__scene" aria-hidden="true" set:html={scenes[univers]} />
+        <GridLines />
+
+        <div class="chapter__intro col-a">
+          <h2 id={`chap-${univers}`} class="phrase">
+            <span class="visually-hidden">{t(lang, 'projects.lead')} {t(lang, `univers.${univers}`)}</span>
+            <span class="phrase__lead caps" aria-hidden="true">
+              {mots(t(lang, 'projects.lead')).map((m) => (
+                <span class="mot"><span class="mot__in">{m}</span></span>
+              ))}
+            </span>
+            <span class="phrase__title display" aria-hidden="true">
+              {mots(t(lang, `univers.${univers}`)).map((m) => (
+                <span class="mot"><span class="mot__in">{m}</span></span>
+              ))}
+            </span>
+          </h2>
+        </div>
+
+        <ul class="chapter__tiles col-bd">
+          {liste.map((p) => (
+            <li class="tile">
+              <a href={urlProjet(lang, p.id)} class="tile__link">
+                <Thumb
+                  class="tile__img"
+                  src={p.data.couverture}
+                  alt=""
+                  label={numero(projets, p)}
+                  sizes="(max-width: 1023px) 100vw, 22vw"
+                  loading="eager"
+                />
+                <span class="tile__caption">
+                  <span class="tile__date caps">{formatDate(lang, p.data.date)}</span>
+                  <span class="tile__title">
+                    <span class="trait">{tr(lang, p.data.titre)}</span>
+                  </span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        {liste.length > 3 && (
+          <button type="button" class="chapter__plus caps" data-list-open>
+            {t(lang, 'projects.more').replace('{n}', String(liste.length))}
+          </button>
+        )}
+      </section>
+    ))
+  }
+</div>
+
+<style>
+  /* Couleurs des rectangles en attente d'image, par univers */
+  .chapter--graphisme {
+    --ph-bg: var(--graphisme-3);
+    --ph-ink: var(--graphisme-4);
+  }
+  .chapter--video {
+    --ph-bg: var(--video-2);
+    --ph-ink: var(--video-1);
+  }
+  .chapter--web {
+    --ph-bg: var(--web-3);
+    --ph-ink: var(--web-1);
+  }
+
+  /* Le chapitre reprend la grille du site : phrase en colonne A, projets de B à D */
+  .chapter {
+    position: relative;
+    overflow: clip;
+    isolation: isolate;
+    align-items: start;
+    padding-block: calc(var(--header-h) + var(--gut) + 83px) var(--space-8);
+  }
+
+  .chapter__scene {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+  }
+
+  .chapter__scene :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Transition (desktop) : la grille du plan et le dessin au trait, avant la couleur.
+     Le calque .scene-traits est créé par src/scripts/hscroll.ts. */
+  .chapter :global(.grid-lines) {
+    display: none;
+  }
+
+  :global(.anim-chapitres) .chapter :global(.grid-lines) {
+    display: grid;
+  }
+
+  .chapter__scene :global(.scene-traits *) {
+    fill: none !important;
+    stroke: var(--ink-soft) !important;
+    stroke-width: 1px !important;
+    stroke-opacity: 1 !important;
+    opacity: 1 !important;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .chapter__intro,
+  .chapter__tiles {
+    position: relative;
+    z-index: 1;
+  }
+
+
+  /* Phrase « Mes productions : … », posée sur la scène sans cadre.
+     Couleur du texte choisie par univers pour rester lisible sur sa scène. */
+  .chapter--graphisme {
+    --phrase: var(--ink);
+  }
+  .chapter--video {
+    --phrase: var(--video-4);
+  }
+  .chapter--web {
+    --phrase: var(--web-1);
+  }
+
+  .phrase {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    color: var(--phrase);
+    font-weight: 400;
+  }
+
+  .phrase__lead {
+    font-size: var(--fs-m);
+    padding-left: 4px;
+  }
+
+  .phrase__title {
+    font-size: var(--fs-xl);
+    line-height: 1.1;
+  }
+
+  .mot {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+    padding-bottom: 0.08em;
+    margin-right: 0.28em;
+  }
+
+  .mot__in {
+    display: inline-block;
+  }
+
+  /* Grille 3 colonnes ; la largeur est bornée par la hauteur d'écran pour que 2 lignes tiennent */
+  .chapter__tiles {
+    --tile-w: calc(((100vh - var(--header-h) - var(--gut) - 83px - 7rem) / 2 - 4.25rem) * 1.6);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--gut);
+    width: min(100%, calc(3 * var(--tile-w) + 2 * var(--gut)));
+  }
+
+  .tile__link {
+    display: flex;
+    flex-direction: column;
+    border: var(--stroke) solid var(--ink);
+    background: var(--paper);
+  }
+
+  /* Rectangle horizontal */
+  .tile__link :global(.tile__img) {
+    height: auto;
+    aspect-ratio: 16 / 10;
+    border-bottom: var(--stroke) solid var(--ink);
+  }
+
+  .tile__link :global(.thumb__label) {
+    font-size: var(--fs-l);
+  }
+
+  .tile__caption {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: var(--space-2) var(--space-3) var(--space-3);
+  }
+
+  .tile__date {
+    font-size: var(--fs-xs);
+    color: var(--ink-soft);
+  }
+
+  .tile__title {
+    font-size: var(--fs-s);
+    font-weight: 600;
+    line-height: 1.3;
+    /* 2 lignes max, même hauteur pour toutes les légendes */
+    min-height: 2.6em;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .tile:hover .trait,
+  .tile__link:focus-visible .trait {
+    background-size: 100% var(--stroke);
+  }
+
+  /* Desktop horizontal : un univers = un écran */
+  :global(.is-h) .chapters {
+    display: flex;
+    height: 100vh;
+  }
+
+  /* Fond papier visible tant que la couleur n'est pas arrivée */
+  :global(.anim-chapitres) .chapter {
+    background: var(--paper);
+  }
+
+  :global(.is-h) .chapter {
+    flex: none;
+    width: 100vw;
+    height: 100vh;
+    padding-bottom: 0;
+  }
+
+  .chapter__plus {
+    display: none;
+  }
+
+  /* ---------- Mobile (vertical) : un univers = un écran, 3 projets au plus ---------- */
+  @media (max-width: 1023px) {
+    .chapter {
+      min-height: 100svh;
+      align-content: start;
+      padding-block: var(--space-8) var(--space-7);
+      row-gap: var(--space-6);
+    }
+
+    /* Décor recadré sur son centre (preserveAspectRatio slice) : il couvre tout l'écran vertical */
+    .chapter__scene :global(svg) {
+      height: 100%;
+    }
+
+    .phrase__title {
+      font-size: clamp(1.9rem, 8.5vw, 2.6rem);
+    }
+
+    .chapter__tiles {
+      grid-template-columns: 1fr;
+      width: 100%;
+      gap: var(--space-4);
+    }
+
+    .tile:nth-child(n + 4) {
+      display: none;
+    }
+
+    /* Ligne compacte : vignette à gauche, date et titre à droite */
+    .tile__link {
+      flex-direction: row;
+      align-items: stretch;
+    }
+
+    .tile__link :global(.tile__img) {
+      flex: none;
+      width: 42%;
+      border-bottom: 0;
+      border-right: var(--stroke) solid var(--ink);
+    }
+
+    .tile__link :global(.thumb__label) {
+      font-size: var(--fs-m);
+    }
+
+    .tile__caption {
+      justify-content: center;
+      padding: var(--space-3);
+    }
+
+    .chapter__plus {
+      display: block;
+      justify-self: start;
+      position: relative;
+      z-index: 1;
+      background: var(--paper);
+      border: var(--stroke) solid var(--ink);
+      padding: var(--space-2) var(--space-4);
+      font-size: var(--fs-xs);
+    }
+  }
+</style>
