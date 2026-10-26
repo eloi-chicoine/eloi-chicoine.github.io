@@ -8,23 +8,22 @@ resume:
   fr: "Une application de vidéo à la demande complète : front, back-office, PHP et MySQL."
   en: "A complete video-on-demand app: front end, admin, PHP and MySQL."
 description:
-  fr: |
-    Projet individuel de fin d'année : développer de A à Z une plateforme de vidéo à la demande, avec deux interfaces. Une application pour les utilisateurs (catalogue, favoris, filtres) et un back-office pour les administrateurs (ajout de films, modération, statistiques).
-
-    Côté front, HTML, CSS et JavaScript, avec mon propre mini-framework CSS (classes utilitaires et composants BEM). Côté back, PHP et MySQL : base de données modélisée avec Looping pour les films, catégories et profils. Des requêtes HTTP en JavaScript interrogent le serveur PHP et génèrent l'affichage des listes et des statistiques.
-
-    Développement sur le serveur de l'IUT via Remote SSH dans VS Code, versionné sur GitHub.
-  en: |
-    End-of-year solo project: build a video-on-demand platform from scratch, with two interfaces. An app for users (catalogue, favourites, filters) and an admin back office (adding films, moderation, statistics).
-
-    Front end in HTML, CSS and JavaScript, with my own mini CSS framework (utility classes and BEM components). Back end in PHP and MySQL: database modelled with Looping for films, categories and profiles. JavaScript HTTP requests query the PHP server and render the lists and statistics.
-
-    Developed on the university server via Remote SSH in VS Code, versioned on GitHub.
+  fr: "Une plateforme de vidéo à la demande développée seul de A à Z : un catalogue pour les utilisateurs (films, favoris, filtres) et un back-office pour les administrateurs (ajout de films, statistiques). Front en HTML, CSS et JavaScript, back en PHP avec une base de données MySQL. (Projet étudiant fictif)"
+  en: "A video-on-demand platform I built solo from scratch: a catalogue for users (films, favourites, filters) and an admin back office (adding films, statistics). Front end in HTML, CSS and JavaScript, back end in PHP with a MySQL database. (Fictional student project)"
 outils: ["JavaScript", "PHP", "MySQL", "Git / GitHub"]
-couverture: ../../assets/projets/plateforme-vod/01-catalogue.jpg
+lien: https://chicoine-sae203.mmi-limoges.fr/appSurprise/
+# écrans : la première capture en grand, les autres 2 par 2, entières
+galerie: ecrans
+couverture: ../../assets/projets/plateforme-vod/01-accueil.webp
 images:
-  - src: ../../assets/projets/plateforme-vod/01-catalogue.jpg
-    alt: { fr: "Catalogue de films de la plateforme, avec carrousel et favoris", en: "Film catalogue of the platform, with carousel and favourites" }
-  - src: ../../assets/projets/plateforme-vod/02-base-de-donnees.jpg
-    alt: { fr: "Table des films dans la base de données MySQL", en: "Films table in the MySQL database" }
+  - src: ../../assets/projets/plateforme-vod/01-accueil.webp
+    alt: { fr: "Accueil de la plateforme : carrousel de films et liste des favoris", en: "Platform home page: film carousel and favourites list" }
+  - src: ../../assets/projets/plateforme-vod/02-fiche-film.webp
+    alt: { fr: "Fiche d'un film : affiche, informations et bouton favoris", en: "Film page: poster, details and favourites button" }
+  - src: ../../assets/projets/plateforme-vod/03-bande-annonce.webp
+    alt: { fr: "Onglets de la fiche film : bande-annonce, bonus et suggestions", en: "Film page tabs: trailer, extras and suggestions" }
+  - src: ../../assets/projets/plateforme-vod/04-statistiques.webp
+    alt: { fr: "Tableau de bord des statistiques du back-office", en: "Back-office statistics dashboard" }
+  - src: ../../assets/projets/plateforme-vod/05-categories.webp
+    alt: { fr: "Catalogue classé par catégories", en: "Catalogue sorted by category" }
 ordre: 2

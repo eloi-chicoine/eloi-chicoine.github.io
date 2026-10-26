@@ -8,27 +8,27 @@ resume:
   fr: "Intégration HTML / CSS, composants générés en JavaScript depuis du JSON, mise en ligne."
   en: "HTML / CSS build, components generated in JavaScript from JSON, deployed online."
 description:
-  fr: |
-    Rôle d'intégrateur web junior : concevoir et mettre en ligne le site « One Page » d'une start-up, en construisant des composants réutilisables.
-
-    Intégration HTML et CSS en mobile-first à partir d'un UI Kit Figma (header, hero, navigation), avec une arborescence de fichiers stricte et un balisage sémantique. Puis séparation du fond et de la forme : pour chaque composant, un template HTML/CSS à balises {{…}}, un fichier de données JSON et un script JavaScript qui les relie.
-
-    Cette mécanique a généré trois sites (Audiophile, Bonbon et ma propre start-up, Legacy), tous hébergés sur un serveur avec une URL publique.
-  en: |
-    Junior web developer role: design and deploy a start-up's one-page website, built from reusable components.
-
-    Mobile-first HTML and CSS build from a Figma UI kit (header, hero, navigation), with a strict file structure and semantic markup. Then content and layout were separated: for each component, an HTML/CSS template with {{…}} tags, a JSON data file and a JavaScript script linking them.
-
-    This system generated three websites (Audiophile, Bonbon and my own start-up, Legacy), all hosted on a server with a public URL.
+  fr: "Le site « One Page » d'une start-up, intégré en HTML et CSS à partir d'une maquette Figma. Chaque section est un composant rempli automatiquement en JavaScript à partir de données JSON, ce qui m'a permis de générer trois sites, dont celui de ma propre start-up, Legacy, tous mis en ligne. (Projet étudiant fictif)"
+  en: "A start-up's one-page website, built in HTML and CSS from a Figma mock-up. Each section is a component filled automatically in JavaScript from JSON data, which let me generate three websites, including one for my own start-up, Legacy, all deployed online. (Fictional student project)"
 outils: ["HTML / CSS", "JavaScript", "JSON", "Figma"]
-couverture: ../../assets/projets/site-one-page-legacy/01-accueil.jpg
+# écrans : la première capture en grand, les autres 2 par 2, entières
+galerie: ecrans
+couverture: ../../assets/projets/site-one-page-legacy/01-accueil.webp
 images:
-  - src: ../../assets/projets/site-one-page-legacy/01-accueil.jpg
-    alt: { fr: "Page d'accueil du site Legacy", en: "Legacy website home page" }
-  - src: ../../assets/projets/site-one-page-legacy/02-about.jpg
-    alt: { fr: "Section « About us » du site Legacy", en: "\"About us\" section of the Legacy website" }
-  - src: ../../assets/projets/site-one-page-legacy/03-probleme-solution.jpg
-    alt: { fr: "Sections problème et solution", en: "Problem and solution sections" }
-  - src: ../../assets/projets/site-one-page-legacy/04-fonctionnement.jpg
-    alt: { fr: "Section « Comment ça marche »", en: "\"How it works\" section" }
+  - src: ../../assets/projets/site-one-page-legacy/01-accueil.webp
+    alt: { fr: "Accueil du site Legacy : « Gravez leur voix dans l'éternité. »", en: "Legacy website home page: \"Engrave their voice for eternity.\"" }
+  - src: ../../assets/projets/site-one-page-legacy/02-medias-accroche.webp
+    alt: { fr: "Bandeau de médias et accroche sur la mémoire familiale", en: "Media banner and tagline about family memory" }
+  - src: ../../assets/projets/site-one-page-legacy/03-probleme.webp
+    alt: { fr: "Section « Le problème » : l'écriture est une barrière", en: "\"The problem\" section: writing is a barrier" }
+  - src: ../../assets/projets/site-one-page-legacy/04-chiffres-avantages.webp
+    alt: { fr: "Chiffres clés et avantages du service", en: "Key figures and service features" }
+  - src: ../../assets/projets/site-one-page-legacy/05-lecteur-audio.webp
+    alt: { fr: "Lecteur audio de démonstration", en: "Demo audio player" }
+  - src: ../../assets/projets/site-one-page-legacy/06-temoignages.webp
+    alt: { fr: "Témoignages de clients", en: "Customer testimonials" }
+  - src: ../../assets/projets/site-one-page-legacy/07-offres.webp
+    alt: { fr: "Les trois offres du service", en: "The service's three plans" }
+  - src: ../../assets/projets/site-one-page-legacy/08-faq-pied-de-page.webp
+    alt: { fr: "Questions fréquentes et pied de page", en: "FAQ and footer" }
 ordre: 1

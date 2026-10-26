@@ -8,27 +8,21 @@ resume:
   fr: "Moodboard, wireframes et maquettes haute fidélité de mon portfolio sur Figma."
   en: "Moodboard, wireframes and high-fidelity mock-ups of my portfolio in Figma."
 description:
-  fr: |
-    Se mettre dans la peau d'un jeune freelance : auditer mon e-réputation, définir un positionnement, optimiser mon profil LinkedIn, puis concevoir l'interface de mon propre portfolio.
-
-    Après un moodboard pour fixer la direction artistique, j'ai structuré l'architecture de l'information en wireframes basse fidélité sur Figma, puis réalisé les maquettes haute fidélité responsive (desktop et mobile).
-
-    Le projet a été présenté en Pecha Kucha : 15 diapositives qui défilent seules toutes les 20 secondes, soit 5 minutes pile.
-  en: |
-    Acting as a young freelancer: audit my online reputation, define a positioning, optimise my LinkedIn profile, then design the interface of my own portfolio.
-
-    After a moodboard to set the art direction, I structured the information architecture with low-fidelity wireframes in Figma, then designed responsive high-fidelity mock-ups (desktop and mobile).
-
-    The project was presented as a Pecha Kucha: 15 slides advancing automatically every 20 seconds, exactly 5 minutes.
+  fr: "Un travail sur mon image professionnelle : audit de ma présence en ligne, profil LinkedIn, puis conception de l'interface de mon portfolio sur Figma, du moodboard aux maquettes haute fidélité desktop et mobile. Le projet a été présenté en Pecha Kucha, 15 diapositives en 5 minutes. (Projet étudiant fictif)"
+  en: "A project on my professional image: an audit of my online presence, my LinkedIn profile, then the design of my portfolio interface in Figma, from moodboard to high-fidelity desktop and mobile mock-ups. It was presented as a Pecha Kucha, 15 slides in 5 minutes. (Fictional student project)"
 outils: ["Figma", "Photoshop"]
-couverture: ../../assets/projets/portfolio-personal-branding/01-maquette.jpg
+# maquettes : la première capture en grand, les autres entières côte à côte
+galerie: maquettes
+couverture: ../../assets/projets/portfolio-personal-branding/01-accueil-desktop.png
 images:
-  - src: ../../assets/projets/portfolio-personal-branding/01-maquette.jpg
-    alt: { fr: "Maquette Figma du portfolio : portrait, citation et grille de projets", en: "Figma mock-up of the portfolio: portrait, quote and project grid" }
-  - src: ../../assets/projets/portfolio-personal-branding/02-maquette-suite.jpg
-    alt: { fr: "Suite de la maquette Figma du portfolio", en: "Continuation of the Figma portfolio mock-up" }
-  - src: ../../assets/projets/portfolio-personal-branding/03-linkedin.jpg
-    alt: { fr: "Profil LinkedIn optimisé", en: "Optimised LinkedIn profile" }
-  - src: ../../assets/projets/portfolio-personal-branding/04-behance.jpg
-    alt: { fr: "Profil Behance", en: "Behance profile" }
-ordre: 2
+  - src: ../../assets/projets/portfolio-personal-branding/01-accueil-desktop.png
+    alt: { fr: "Maquette Figma du portfolio : accueil avec portrait et accroche « I'm Serious »", en: "Figma mock-up of the portfolio: home page with portrait and the tagline \"I'm Serious\"" }
+  - src: ../../assets/projets/portfolio-personal-branding/02-a-propos-projets.png
+    alt: { fr: "Maquette : section À propos et grille de projets", en: "Mock-up: About section and project grid" }
+  - src: ../../assets/projets/portfolio-personal-branding/03-competences-contact.png
+    alt: { fr: "Maquette : compétences, contact et pied de page", en: "Mock-up: skills, contact and footer" }
+  - src: ../../assets/projets/portfolio-personal-branding/04-mobile-accueil.png
+    alt: { fr: "Maquette mobile : accueil et À propos", en: "Mobile mock-up: home and About" }
+  - src: ../../assets/projets/portfolio-personal-branding/05-mobile-projets-contact.png
+    alt: { fr: "Maquette mobile : projets, compétences et contact", en: "Mobile mock-up: projects, skills and contact" }
+ordre: 3

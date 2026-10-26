@@ -15,12 +15,14 @@ interface Props {
   /** 'eager' pour les vignettes de la piste horizontale : en 'lazy', le navigateur ne voit pas
       toujours qu'elles entrent à l'écran quand la piste glisse (transform). */
   loading?: 'lazy' | 'eager';
+  /** true : image entière, sans recadrage (stickers) */
+  contenir?: boolean;
 }
 
-const { src, alt, label, sizes = '33vw', class: className, couleur = false, loading = 'lazy' } = Astro.props;
+const { src, alt, label, sizes = '33vw', class: className, couleur = false, loading = 'lazy', contenir = false } = Astro.props;
 ---
 
-<div class:list={['thumb', className, { 'thumb--couleur': couleur }]}>
+<div class:list={['thumb', className, { 'thumb--couleur': couleur, 'thumb--contenir': contenir }]}>
   {
     src ? (
       <Image src={src} alt={alt} widths={[480, 960, 1440]} sizes={sizes} loading={loading} />
@@ -53,6 +55,12 @@ const { src, alt, label, sizes = '33vw', class: className, couleur = false, load
   :global(a:hover) > .thumb :global(img),
   :global(a:focus-visible) > .thumb :global(img) {
     filter: grayscale(0);
+  }
+
+  .thumb--contenir :global(img) {
+    object-fit: contain;
+    object-position: center;
+    padding: 6%;
   }
 
   .thumb__label {

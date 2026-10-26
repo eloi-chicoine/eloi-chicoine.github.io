@@ -1,38 +1,30 @@
 # SAÉ 1.04 — Produire un contenu audio et vidéo (BUT MMI 1)
 titre:
   fr: "Stop motion — Un pied dans un monde meilleur"
-  en: "Stop motion — One foot in a better world"
+  en: "Stop motion — One step in a better world"
 date: "2025-11"
 univers: video
 resume:
   fr: "Spot publicitaire de 30 secondes en stop motion pour une marque de chaussures."
   en: "A 30-second stop-motion ad for a shoe brand."
 description:
-  fr: |
-    Réaliser en trinôme un spot de 30 secondes en stop motion pour une grande marque de chaussures, sur le slogan « Un pied dans un monde meilleur », avec une voix off en anglais.
-
-    Pré-production : moodboard, écriture de la voix off et storyboard détaillé, pour une direction artistique joyeuse et lumineuse. Tournage en studio au smartphone avec Stop Motion Studio, trépied, fonds colorés et softbox ; rôles répartis entre prise de vue et lumière, animation des objets et script.
-
-    Post-production sur Premiere Pro : montage, étalonnage, sound design et titrage, export HD H.264 pour YouTube. Un making-of commenté de 2 minutes a été ajouté à la dernière minute.
-  en: |
-    A team of three, a 30-second stop-motion ad for a major shoe brand, on the slogan "One foot in a better world", with an English voice-over.
-
-    Pre-production: moodboard, voice-over script and a detailed storyboard, for a cheerful and bright art direction. Studio shoot on a smartphone with Stop Motion Studio, tripod, coloured backdrops and softbox; roles split between camera and lighting, object animation and continuity.
-
-    Post-production in Premiere Pro: editing, colour grading, sound design and titles, HD H.264 export for YouTube. A 2-minute narrated making-of was added at the last minute.
+  fr: "Un spot publicitaire de 30 secondes en stop motion pour une marque de chaussures, sur le slogan « Un pied dans un monde meilleur ». Réalisé en trinôme : storyboard, tournage image par image en studio, puis montage, étalonnage et voix off en anglais sur Premiere Pro. (Projet étudiant fictif)"
+  en: "A 30-second stop-motion ad for a shoe brand, on the slogan \"One step in a better world\". Made in a team of three: storyboard, frame-by-frame studio shoot, then editing, colour grading and an English voice-over in Premiere Pro. (Fictional student project)"
 outils: ["Stop Motion Studio", "Premiere Pro"]
-couverture: ../../assets/projets/stop-motion-un-pied/01-plan.jpg
+# Vidéo du spot (dans public/videos), affichée en tête de la page projet
+videoFichier: videos/stop-motion-un-pied.mp4
+couverture: ../../assets/projets/stop-motion-un-pied/01-plan-final.webp
 images:
-  - src: ../../assets/projets/stop-motion-un-pied/01-plan.jpg
-    alt: { fr: "Plan du spot : une main tient un smartphone sur fond rouge", en: "Shot from the ad: a hand holding a smartphone on a red background" }
-  - src: ../../assets/projets/stop-motion-un-pied/02-moodboard.jpg
-    alt: { fr: "Moodboard et direction artistique", en: "Moodboard and art direction" }
-  - src: ../../assets/projets/stop-motion-un-pied/03-storyboard.jpg
-    alt: { fr: "Storyboard du spot", en: "Storyboard of the ad" }
-  - src: ../../assets/projets/stop-motion-un-pied/04-studio.jpg
-    alt: { fr: "Installation du studio : projecteurs et fond orange", en: "Studio setup: lights and orange backdrop" }
-  - src: ../../assets/projets/stop-motion-un-pied/05-tournage.jpg
-    alt: { fr: "L'équipe pendant le tournage", en: "The team during the shoot" }
-  - src: ../../assets/projets/stop-motion-un-pied/06-making-of.jpg
-    alt: { fr: "Extrait du making-of", en: "Still from the making-of" }
+  - src: ../../assets/projets/stop-motion-un-pied/01-plan-final.webp
+    alt: { fr: "Plan final : une Converse sur fond rouge et le slogan « One step in a better world »", en: "Final shot: a Converse on a red background with the slogan \"One step in a better world\"" }
+  - src: ../../assets/projets/stop-motion-un-pied/02-jean-coton.webp
+    alt: { fr: "Des chutes de jean et des boules de coton sur fond rouge", en: "Denim scraps and cotton balls on a red background" }
+  - src: ../../assets/projets/stop-motion-un-pied/03-etoiles.webp
+    alt: { fr: "Une Converse entourée d'étoiles jaunes en papier", en: "A Converse surrounded by yellow paper stars" }
+  - src: ../../assets/projets/stop-motion-un-pied/04-chemin.webp
+    alt: { fr: "Une Converse au bout d'un chemin de bandes de papier blanc", en: "A Converse at the end of a trail of white paper strips" }
+  - src: ../../assets/projets/stop-motion-un-pied/05-main.webp
+    alt: { fr: "Une main prête à rattraper une Converse en l'air", en: "A hand about to catch a Converse in mid-air" }
+  - src: ../../assets/projets/stop-motion-un-pied/06-studio.jpg
+    alt: { fr: "Le set-up de tournage en studio : projecteurs et fond orange", en: "The studio set-up: lights and orange backdrop" }
 ordre: 1

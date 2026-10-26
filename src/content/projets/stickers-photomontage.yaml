@@ -1,0 +1,42 @@
+# SAÉ 1.03 — planche en photomontage (Photoshop)
+titre:
+  fr: "Stickers en photomontage"
+  en: "Photomontage stickers"
+date: "2025-10"
+univers: graphisme
+resume:
+  fr: "Les mêmes compétences en photomontages décalés, composés sur Photoshop."
+  en: "The same skills as offbeat photomontages, composed in Photoshop."
+description:
+  fr: "La même idée traitée en photomontage : chaque compétence devient une image décalée composée sur Photoshop, à la manière de Jean Lecointre. Détourage, modes de fusion et archives en noir et blanc mêlées à des couleurs franches donnent des métaphores visuelles plus texturées et plus surprenantes. (Projet étudiant fictif)"
+  en: "The same idea in photomontage: each skill becomes an offbeat image composed in Photoshop, in the style of Jean Lecointre. Cut-outs, blend modes and black and white archives mixed with bold colours make more textured, more surprising visual metaphors. (Fictional student project)"
+outils: ["Photoshop"]
+# planche : tous les stickers en grille régulière, sans recadrage
+galerie: planche
+couverture: ../../assets/projets/stickers-photomontage/07.jpg
+images:
+  - src: ../../assets/projets/stickers-photomontage/01.jpg
+    alt: { fr: "Monogramme EC en lettres de bois", en: "EC monogram in wooden letters" }
+  - src: ../../assets/projets/stickers-photomontage/02.jpg
+    alt: { fr: "Un écran d'ordinateur où un personnage promène un kangourou", en: "A computer screen where a figure walks a kangaroo" }
+  - src: ../../assets/projets/stickers-photomontage/03.jpg
+    alt: { fr: "Une femme jaillit d'une voiture ancienne sur une route marquée PS", en: "A woman bursting out of a vintage car on a road marked PS" }
+  - src: ../../assets/projets/stickers-photomontage/04.jpg
+    alt: { fr: "Un poisson-oreille et un dauphin dans une eau peinte", en: "An ear-shaped fish and a dolphin in painted water" }
+  - src: ../../assets/projets/stickers-photomontage/05.jpg
+    alt: { fr: "Des enfants qui courent, des logos de réseaux sociaux à la place du visage", en: "Children running with social media logos for faces" }
+  - src: ../../assets/projets/stickers-photomontage/06.jpg
+    alt: { fr: "Un homme lit un journal où apparaît un visage", en: "A man reading a newspaper showing a face" }
+  - src: ../../assets/projets/stickers-photomontage/07.jpg
+    alt: { fr: "Mon visage au sommet d'un gratte-ciel, avec mon prénom", en: "My face on top of a skyscraper, with my name" }
+  - src: ../../assets/projets/stickers-photomontage/08.jpg
+    alt: { fr: "Un couple cuisine sous le mot Entraide", en: "A couple cooking under the word Entraide (mutual help)" }
+  - src: ../../assets/projets/stickers-photomontage/09.jpg
+    alt: { fr: "Des espadons lancés comme des fusées dans une vague", en: "Swordfish launched like rockets through a wave" }
+  - src: ../../assets/projets/stickers-photomontage/10.jpg
+    alt: { fr: "Photomontage d'une salle de classe ancienne", en: "Photomontage of an old classroom" }
+  - src: ../../assets/projets/stickers-photomontage/11.jpg
+    alt: { fr: "Un homme dont la tête est une horloge", en: "A man with a clock for a head" }
+  - src: ../../assets/projets/stickers-photomontage/12.jpg
+    alt: { fr: "Un chat et un homme regardent par-dessus un mur, mot Curiosité", en: "A cat and a man peering over a wall, with the word Curiosité (curiosity)" }
+ordre: 2

@@ -1,0 +1,42 @@
+# SAÉ 1.03 — planche vectorielle (Illustrator)
+titre:
+  fr: "Stickers vectoriels"
+  en: "Vector stickers"
+date: "2025-10"
+univers: graphisme
+resume:
+  fr: "Mes compétences et mon avatar en stickers vectoriels, dessinés sur Illustrator."
+  en: "My skills and my avatar as vector stickers, drawn in Illustrator."
+description:
+  fr: "Une planche de stickers dessinés sur Illustrator pour représenter mes compétences, hard skills et soft skills, ainsi que mon avatar. Inspirée de l'illustrateur Wood : formes géométriques, aplats de couleurs vives et personnages simplifiés, pour qu'une idée abstraite se lise en un coup d'œil. (Projet étudiant fictif)"
+  en: "A sheet of stickers drawn in Illustrator to represent my skills, hard and soft, along with my avatar. Inspired by illustrator Wood: geometric shapes, bold flat colours and simplified characters, so an abstract idea reads at a glance. (Fictional student project)"
+outils: ["Illustrator"]
+# planche : tous les stickers en grille régulière, sans recadrage
+galerie: planche
+couverture: ../../assets/projets/stickers-vectoriels/03.png
+images:
+  - src: ../../assets/projets/stickers-vectoriels/01.png
+    alt: { fr: "Sticker : un personnage présente devant un tableau à un public", en: "Sticker: a figure presenting at a board to an audience" }
+  - src: ../../assets/projets/stickers-vectoriels/02.png
+    alt: { fr: "Sticker : un personnage bondit à côté d'un point d'interrogation", en: "Sticker: a figure leaping next to a question mark" }
+  - src: ../../assets/projets/stickers-vectoriels/03.png
+    alt: { fr: "Sticker : un personnage concentré à son bureau, un réveil sonne", en: "Sticker: a figure focused at a desk, an alarm clock ringing" }
+  - src: ../../assets/projets/stickers-vectoriels/04.png
+    alt: { fr: "Sticker : des personnages se tiennent entre deux poteaux", en: "Sticker: figures holding on to each other between two posts" }
+  - src: ../../assets/projets/stickers-vectoriels/05.png
+    alt: { fr: "Sticker : un personnage entouré d'écrans et d'un piano", en: "Sticker: a figure surrounded by screens and a piano" }
+  - src: ../../assets/projets/stickers-vectoriels/06.png
+    alt: { fr: "Mon avatar : un personnage qui marche", en: "My avatar: a walking character" }
+  - src: ../../assets/projets/stickers-vectoriels/07.png
+    alt: { fr: "Sticker : la lettre C qui forme le nom Chicoine", en: "Sticker: the letter C forming the name Chicoine" }
+  - src: ../../assets/projets/stickers-vectoriels/08.png
+    alt: { fr: "Sticker : deux profils qui échangent des idées", en: "Sticker: two profiles exchanging ideas" }
+  - src: ../../assets/projets/stickers-vectoriels/09.png
+    alt: { fr: "Sticker : un personnage assis devant Photoshop", en: "Sticker: a figure sitting in front of Photoshop" }
+  - src: ../../assets/projets/stickers-vectoriels/10.png
+    alt: { fr: "Sticker : un personnage au casque avec une perche son", en: "Sticker: a figure with headphones and a boom microphone" }
+  - src: ../../assets/projets/stickers-vectoriels/11.png
+    alt: { fr: "Sticker : un personnage entouré de bulles de pensée", en: "Sticker: a figure surrounded by thought bubbles" }
+  - src: ../../assets/projets/stickers-vectoriels/12.png
+    alt: { fr: "Sticker : une main qui tient des logos de réseaux sociaux", en: "Sticker: a hand holding social media logos" }
+ordre: 1

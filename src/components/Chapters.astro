@@ -62,6 +62,7 @@ const mots = (texte: string) => texte.split(' ');
                   label={numero(projets, p)}
                   sizes="(max-width: 1023px) 100vw, 22vw"
                   loading="eager"
+                  contenir={p.data.galerie === 'planche'}
                 />
                 <span class="tile__caption">
                   <span class="tile__date caps">{formatDate(lang, p.data.date)}</span>

@@ -1,9 +1,10 @@
 ---
 // Gabarit unique des pages projet : titre + date, description, lien, vidéo, grille d'images.
 import Base from '../layouts/Base.astro';
+import { getImage } from 'astro:assets';
 import Thumb from '../components/Thumb.astro';
 import { getProjets, numero, suivant, indexUnivers, type Projet } from '../lib/projets';
-import { t, tr, urlAccueil, urlProjet, autreLangue, formatDate, type Lang } from '../i18n/utils';
+import { t, tr, urlAccueil, urlProjet, autreLangue, formatDate, asset, type Lang } from '../i18n/utils';
 
 interface Props {
   lang: Lang;
@@ -27,6 +28,12 @@ function embed(lien?: string) {
   return null;
 }
 const lecteur = embed(data.video);
+
+// Vidéo hébergée avec le site : l'image de couverture sert d'affiche avant la lecture
+const affiche =
+  data.videoFichier && data.couverture
+    ? (await getImage({ src: data.couverture, width: 1280, format: 'webp' })).src
+    : undefined;
 
 // Sans images, on garde 4 rectangles gris pour montrer la mise en page
 const images = data.images.length
@@ -97,8 +104,20 @@ const images = data.images.length
       )
     }
 
+    {
+      data.videoFichier && (
+        <div class="grid project__video">
+          <div class="col-ad video">
+            <video controls playsinline preload="none" poster={affiche} aria-label={titre}>
+              <source src={asset(data.videoFichier)} type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      )
+    }
+
     <section class="grid" aria-label={t(lang, 'projects.gallery')}>
-      <ul class="gallery">
+      <ul class:list={['gallery', `gallery--${data.galerie}`, { 'gallery--video': data.videoFichier }]}>
         {
           images.map((img, i) => (
             <li class="gallery__item">
@@ -106,8 +125,10 @@ const images = data.images.length
                 src={img.src}
                 alt={img.alt}
                 label={img.src ? '' : t(lang, 'projects.pending')}
-                sizes={i === 0 ? '95vw' : '34vw'}
+                sizes={data.galerie === 'planche' ? '(max-width: 1023px) 50vw, 24vw' : i === 0 ? '95vw' : data.galerie === 'ecrans' ? '(max-width: 1023px) 95vw, 48vw' : '34vw'}
                 couleur
+                contenir={data.galerie === 'planche'}
+                loading={data.galerie === 'standard' ? 'lazy' : 'eager'}
               />
             </li>
           ))
@@ -186,6 +207,13 @@ const images = data.images.length
     background: var(--ink);
   }
 
+  .video video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: var(--ink);
+  }
+
   .video iframe {
     width: 100%;
     height: 100%;
@@ -211,6 +239,101 @@ const images = data.images.length
   .gallery__item:nth-child(3n + 2) { grid-column: a; }
   .gallery__item:nth-child(3n + 3) { grid-column: b; }
   .gallery__item:nth-child(3n + 4) { grid-column: c-start / d-end; }
+
+  /* Planche : tous les éléments à la même taille, 4 par ligne, entiers et sans fond */
+  .gallery--planche {
+    grid-column: a-start / d-end;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--gut);
+  }
+
+  .gallery--planche .gallery__item:nth-child(n) {
+    grid-column: auto;
+    height: auto;
+    aspect-ratio: 1;
+  }
+
+  .gallery--planche .gallery__item :global(.thumb) {
+    background: none;
+  }
+
+  .gallery--planche .gallery__item :global(.thumb img) {
+    padding: 0;
+  }
+
+  /* Sous une vidéo : les captures en grille régulière de 3, au format 16:9 */
+  .gallery--video {
+    grid-column: a-start / d-end;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--gut);
+  }
+
+  .gallery--video .gallery__item:nth-child(n) {
+    grid-column: auto;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+
+  /* Écrans : première capture en grand, puis 2 par ligne, entières (pas de recadrage) */
+  .gallery--ecrans {
+    grid-column: a-start / d-end;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--gut);
+  }
+
+  .gallery--ecrans .gallery__item:nth-child(n) {
+    grid-column: auto;
+    height: auto;
+  }
+
+  .gallery--ecrans .gallery__item:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .gallery--ecrans .gallery__item :global(.thumb) {
+    background: none;
+    height: auto;
+  }
+
+  .gallery--ecrans .gallery__item :global(.thumb img) {
+    height: auto;
+    border: var(--stroke) solid var(--line);
+  }
+
+  /* Maquettes : première capture en grand, puis les autres entières, jamais agrandies */
+  .gallery--maquettes {
+    grid-column: a-start / d-end;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--gut);
+    align-items: start;
+  }
+
+  .gallery--maquettes .gallery__item:nth-child(n) {
+    grid-column: auto;
+    height: auto;
+  }
+
+  .gallery--maquettes .gallery__item:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .gallery--maquettes .gallery__item :global(.thumb) {
+    background: none;
+    height: auto;
+  }
+
+  .gallery--maquettes .gallery__item :global(.thumb img) {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 560px; /* les maquettes mobiles, très hautes, restent lisibles sans être agrandies */
+    margin-inline: auto;
+    border: var(--stroke) solid var(--line);
+  }
+
+  .gallery--maquettes .gallery__item:first-child :global(.thumb img) {
+    max-height: none;
+  }
 
   .gallery__item :global(.thumb__label) {
     font-size: var(--fs-s);
@@ -258,6 +381,23 @@ const images = data.images.length
     }
     .gallery__item:nth-child(n) {
       grid-column: a;
+    }
+    .gallery--planche,
+    .gallery--maquettes,
+    .gallery--video {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-4);
+    }
+    .gallery--planche .gallery__item:nth-child(n),
+    .gallery--maquettes .gallery__item:nth-child(n),
+    .gallery--video .gallery__item:nth-child(n) {
+      grid-column: auto;
+    }
+    .gallery--maquettes .gallery__item:first-child {
+      grid-column: 1 / -1;
+    }
+    .gallery--ecrans {
+      grid-template-columns: 1fr;
     }
   }
 </style>

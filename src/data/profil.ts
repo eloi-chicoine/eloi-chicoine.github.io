@@ -12,6 +12,6 @@ export const profil = {
 export const outils = {
   design: ['Photoshop', 'Illustrator', 'Affinity', 'Figma'],
   video: ['DaVinci Resolve', 'FL Studio', 'Stop Motion Studio'],
-  web: ['HTML / CSS', 'JavaScript', 'Astro', 'GSAP', 'VS Code'],
+  web: ['HTML / CSS', 'JavaScript', 'VS Code'],
   orga: ['Trello', 'Google Workspace'],
 } as const;
