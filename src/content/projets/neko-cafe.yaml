@@ -1,0 +1,30 @@
+# Site vitrine d'un café kawaii (maquette)
+titre:
+  fr: "Neko Café"
+  en: "Neko Café"
+date: "2026-10"
+univers: graphisme
+resume:
+  fr: "Le site vitrine d’un café kawaii inspiré de la culture japonaise."
+  en: "A showcase website for a kawaii café inspired by Japanese culture."
+description:
+  fr: "La maquette du site vitrine d’un café kawaii imaginaire à Limoges, aux pâtisseries et boissons inspirées de la culture japonaise. À partir d’un moodboard, j’ai construit une identité douce et ludique : palette pastel, formes arrondies, pattes de chat et menu illustré, jusqu’à la carte de localisation et au pied de page. (Projet étudiant fictif)"
+  en: "The mock-up of a showcase website for an imaginary kawaii café in Limoges, serving pastries and drinks inspired by Japanese culture. Starting from a moodboard, I built a soft and playful identity: pastel palette, rounded shapes, cat paws and an illustrated menu, all the way to the location map and the footer. (Fictional student project)"
+outils: ["Figma"]
+# mosaïque : 2 colonnes où les images s'empilent sans trous (formats variés)
+galerie: mosaique
+couverture: ../../assets/projets/neko-cafe/01-accueil.webp
+images:
+  - src: ../../assets/projets/neko-cafe/01-accueil.webp
+    alt: { fr: "Accueil du site Neko Café : patte de chat « Welcome, have a cup! » sur une photo de pâtisseries", en: "Neko Café home page: a cat paw saying \"Welcome, have a cup!\" over a pastry photo" }
+  - src: ../../assets/projets/neko-cafe/02-concept.webp
+    alt: { fr: "Section « Notre concept » avec photos de la boutique", en: "\"Our concept\" section with shop photos" }
+  - src: ../../assets/projets/neko-cafe/03-menu.png
+    alt: { fr: "Carte des pâtisseries et boissons, avec illustrations", en: "Pastry and drinks menu, with illustrations" }
+  - src: ../../assets/projets/neko-cafe/04-galerie-localisation.webp
+    alt: { fr: "Galerie photo et carte de localisation à Limoges", en: "Photo gallery and location map in Limoges" }
+  - src: ../../assets/projets/neko-cafe/05-pied-de-page.png
+    alt: { fr: "Pied de page orange avec la silhouette d'un chat", en: "Orange footer with a cat silhouette" }
+  - src: ../../assets/projets/neko-cafe/06-moodboard.webp
+    alt: { fr: "Moodboard de la direction artistique kawaii", en: "Moodboard for the kawaii art direction" }
+ordre: 4

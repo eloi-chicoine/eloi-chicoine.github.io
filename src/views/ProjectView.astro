@@ -125,7 +125,20 @@ const images = data.images.length
                 src={img.src}
                 alt={img.alt}
                 label={img.src ? '' : t(lang, 'projects.pending')}
-                sizes={data.galerie === 'planche' ? '(max-width: 1023px) 50vw, 24vw' : i === 0 ? '95vw' : data.galerie === 'ecrans' ? '(max-width: 1023px) 95vw, 48vw' : '34vw'}
+                sizes={
+                  data.galerie === 'planche'
+                    ? '(max-width: 1023px) 50vw, 24vw'
+                    : data.galerie === 'mosaique'
+                      ? '(max-width: 1023px) 95vw, 48vw'
+                      : i === 0
+                      ? // grande image : jamais affichée plus large que sa taille d'origine
+                        img.src
+                        ? `min(95vw, ${img.src.width}px)`
+                        : '95vw'
+                      : data.galerie === 'ecrans'
+                        ? '(max-width: 1023px) 95vw, 48vw'
+                        : '34vw'
+                }
                 couleur
                 contenir={data.galerie === 'planche'}
                 loading={data.galerie === 'standard' ? 'lazy' : 'eager'}
@@ -300,6 +313,30 @@ const images = data.images.length
     border: var(--stroke) solid var(--line);
   }
 
+  /* Mosaïque : 2 colonnes, les images s'empilent sans trous, entières et jamais agrandies */
+  .gallery--mosaique {
+    display: block;
+    grid-column: a-start / d-end;
+    column-count: 2;
+    column-gap: var(--gut);
+  }
+
+  .gallery--mosaique .gallery__item:nth-child(n) {
+    height: auto;
+    break-inside: avoid;
+    margin-bottom: var(--gut);
+  }
+
+  .gallery--mosaique .gallery__item :global(.thumb) {
+    background: none;
+    height: auto;
+  }
+
+  .gallery--mosaique .gallery__item :global(.thumb img) {
+    height: auto;
+    border: var(--stroke) solid var(--line);
+  }
+
   /* Maquettes : première capture en grand, puis les autres entières, jamais agrandies */
   .gallery--maquettes {
     grid-column: a-start / d-end;
@@ -333,6 +370,10 @@ const images = data.images.length
 
   .gallery--maquettes .gallery__item:first-child :global(.thumb img) {
     max-height: none;
+  }
+
+  .gallery--maquettes .gallery__item:first-child :global(.thumb) {
+    text-align: center;
   }
 
   .gallery__item :global(.thumb__label) {
@@ -398,6 +439,9 @@ const images = data.images.length
     }
     .gallery--ecrans {
       grid-template-columns: 1fr;
+    }
+    .gallery--mosaique {
+      column-count: 1;
     }
   }
 </style>

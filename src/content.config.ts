@@ -29,7 +29,8 @@ const projets = defineCollection({
       // 'planche' : toutes les images en grille régulière, entières (stickers, illustrations…)
       // 'maquettes' : la première en grand, les autres entières côte à côte (captures de tailles variées)
       // 'ecrans' : la première en grand, les autres 2 par 2, entières (captures d'écran de même format)
-      galerie: z.enum(['standard', 'planche', 'maquettes', 'ecrans']).default('standard'),
+      // 'mosaique' : 2 colonnes où les images s'empilent sans trous (formats très variés)
+      galerie: z.enum(['standard', 'planche', 'maquettes', 'ecrans', 'mosaique']).default('standard'),
       ordre: z.number().optional(),
       // true = texte provisoire, à remplacer par le vrai projet avant diffusion
       exemple: z.boolean().default(false),
